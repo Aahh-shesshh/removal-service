@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.abc.com
+
+# Sitemaps
+Sitemap: https://www.abc.com/sitemap.xml
