@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { LucideMenu } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import { LucideMenu } from "lucide-react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-import { Button } from '@/components/ui/button';
-import { COMPANY_LOGO, SITE_URL } from '@/data/constants';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import { COMPANY_LOGO, SITE_URL } from "@/data/constants";
+import { cn } from "@/lib/utils";
 
-import { Menu } from './menu';
+import { Menu } from "./menu";
 
-const MobileDrawer = dynamic(() => import('./mobile-drawer'), {
+const MobileDrawer = dynamic(() => import("./mobile-drawer"), {
   ssr: false,
   loading: () => (
     <Button variant="link" className="block md:hidden">
@@ -23,12 +23,12 @@ const MobileDrawer = dynamic(() => import('./mobile-drawer'), {
 
 export default function Navbar() {
   return (
-    <div className={cn('border-b shadow-sm ')}>
+    <div className={cn("border-b shadow-sm ")}>
       <nav className="layout flex h-20 items-center justify-between">
         <div className="flex items-center gap-24">
-          <Link href={SITE_URL || '/'}>
+          <Link href={SITE_URL || "/"}>
             <Image
-              src={COMPANY_LOGO || ''}
+              src={COMPANY_LOGO || ""}
               alt="logo"
               width={180}
               height={180}

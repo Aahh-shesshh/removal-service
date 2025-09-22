@@ -1,18 +1,17 @@
-import './globals.css';
+import "./globals.css";
 
-import { GoogleAnalytics } from '@next/third-parties/google';
-import type { Metadata, ResolvingMetadata, Viewport } from 'next';
+import { GoogleAnalytics } from "@next/third-parties/google";
+import type { Metadata, ResolvingMetadata, Viewport } from "next";
 import {
   Bungee_Shade as Font2,
   Hanken_Grotesk as Font,
-} from 'next/font/google';
-import Script from 'next/script';
-import { Suspense } from 'react';
-import { Toaster } from 'react-hot-toast';
+} from "next/font/google";
+import Script from "next/script";
+import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 
-import Navbar from '@/components/layout/navbar';
-import BookQuoteContextProvider from '@/context/book-quote';
-import { data } from '@/data/about-us';
+import BookQuoteContextProvider from "@/context/book-quote";
+import { data } from "@/data/about-us";
 import {
   COMPANY_NAME,
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
@@ -20,35 +19,37 @@ import {
   NEXT_PUBLIC_MAPS_API_KEY,
   NEXT_PUBLIC_SITE_URL,
   SITE_URL,
-} from '@/data/constants';
-import { cn, generateKeywords } from '@/lib/utils';
+} from "@/data/constants";
+import { cn, generateKeywords } from "@/lib/utils";
+import Navbar from "@/components/layout/navbar";
+import TopSlider from "@/components/layout/top-slider";
 
 const font = Font({
-  subsets: ['latin'],
-  variable: '--font-custom',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-custom",
+  display: "swap",
 });
 
 const font2 = Font2({
-  subsets: ['latin'],
-  variable: '--font-custom-secondary',
-  display: 'swap',
-  weight: ['400'],
+  subsets: ["latin"],
+  variable: "--font-custom-secondary",
+  display: "swap",
+  weight: ["400"],
 });
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   minimumScale: 1,
   maximumScale: 2,
   userScalable: true,
-  viewportFit: 'cover',
-  themeColor: '#FFFFFF',
+  viewportFit: "cover",
+  themeColor: "#FFFFFF",
 };
 
 export async function generateMetadata(
   _: P,
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { abstract, description, openGraph, twitter } = await parent;
 
@@ -59,42 +60,42 @@ export async function generateMetadata(
     },
     icons: [
       {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '32x32',
-        url: '/logo/logo-png.png',
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/logo/logo-png.png",
       },
     ],
     title: COMPANY_NAME,
-    publisher: 'Aarambha IT Research Center',
-    keywords: generateKeywords(data?.description || ''),
+    publisher: "Aarambha IT Research Center",
+    keywords: generateKeywords(data?.description || ""),
     abstract: data.description || abstract,
     authors: [
       {
-        name: 'Aakash Acharya',
-        url: 'https://aakashacharya.com.np/',
+        name: "Aakash Acharya",
+        url: "https://aakashacharya.com.np/",
       },
     ],
-    category: 'Service',
-    classification: 'Removal Service',
-    creator: 'Aakash Acharya',
-    generator: 'Next.js',
-    robots: 'index, follow',
+    category: "Service",
+    classification: "Removal Service",
+    creator: "Aakash Acharya",
+    generator: "Next.js",
+    robots: "index, follow",
     verification: {
       google: NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
     description: data?.description || description,
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: COMPANY_NAME,
-      description: data.description || description || '',
+      description: data.description || description || "",
       images: twitter?.images,
     },
     openGraph: {
       title: COMPANY_NAME,
-      description: data?.description || description || '',
+      description: data?.description || description || "",
       images: openGraph?.images,
-      type: 'article',
+      type: "article",
     },
     applicationName: COMPANY_NAME,
     metadataBase: new URL(NEXT_PUBLIC_SITE_URL!),
@@ -126,7 +127,7 @@ export default function RootLayout({
         async
         defer
       />
-      <body className={cn(font.variable, font2.variable, 'relative')}>
+      <body className={cn(font.variable, font2.variable, "relative")}>
         <noscript>
           <iframe
             title="Google Tag Manager"
@@ -134,7 +135,7 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/ns.html?id=GTM-NNRDB9XD"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
         <div id="fb-root" />
@@ -155,6 +156,7 @@ export default function RootLayout({
                 },
               }}
             />
+            <TopSlider />
             <Navbar />
             {children}
           </BookQuoteContextProvider>

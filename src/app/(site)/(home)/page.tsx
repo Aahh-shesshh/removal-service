@@ -32,7 +32,7 @@ const ReviewsSection = dynamic(
 
 export default function Home() {
   return (
-    <div className="layout size-full space-y-24 py-24">
+    <div className="layout size-full space-y-24">
       <HeroSection />
       <OurProcessSection />
       <div className="flex flex-col gap-y-4">
