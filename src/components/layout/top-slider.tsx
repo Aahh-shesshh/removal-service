@@ -1,6 +1,15 @@
 import React from "react";
-import { Mail, MapPin, Star, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { FiFacebook } from "react-icons/fi";
+import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
+import {
+  COMPANY_ADDRESS,
+  COMPANY_INFO_EMAIL,
+  COMPANY_PHONE_NUMBER,
+  FACEBOOK_PAGE_URL,
+  INSTAGRAM_PROFILE_URL,
+} from "@/data/constants";
 
 export default function TopSlider() {
   return (
@@ -30,7 +39,7 @@ export default function TopSlider() {
                 />
               </div>
               <span className="hover:text-blue-300 transition-colors duration-200 font-medium">
-                Sydney, Melbourne, Brisbane & Perth
+                {COMPANY_ADDRESS}
               </span>
             </div>
 
@@ -44,17 +53,10 @@ export default function TopSlider() {
               </div>
               <div className="flex items-center gap-1">
                 <Link
-                  href="tel:1800REMOVALS"
+                  href={`tel:${COMPANY_PHONE_NUMBER}`}
                   className="hover:text-green-300 transition-colors duration-200 font-medium"
                 >
-                  1800 REMOVALS
-                </Link>
-                <span className="text-gray-400 mx-1">|</span>
-                <Link
-                  href="tel:0412345678"
-                  className="hover:text-green-300 transition-colors duration-200 font-medium"
-                >
-                  04 1234 5678
+                  {COMPANY_PHONE_NUMBER}
                 </Link>
               </div>
             </div>
@@ -71,34 +73,32 @@ export default function TopSlider() {
                 href="mailto:info@multiremoval.com.au"
                 className="hover:text-blue-300 transition-colors duration-200 font-medium"
               >
-                info@multiremoval.com.au
+                {COMPANY_INFO_EMAIL}
               </Link>
             </div>
           </div>
 
           {/* Right Section - Trust Badge & CTA */}
-          <div className="flex items-center gap-6">
-            {/* Trust Badge */}
-            <div className="flex items-center gap-2 text-sm opacity-90">
-              <div className="p-1 rounded-full bg-yellow-500/20">
-                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              </div>
-              <span className="text-yellow-200 font-medium">
-                Australia's #1 Rated
-              </span>
-              <span className="text-gray-400">•</span>
-              <span className="text-green-200 font-medium">24/7 Available</span>
-            </div>
-
-            {/* Quick Quote Button */}
+          <div className="flex items-center gap-3">
             <Link
-              href="/book-quote/select-service"
-              className="group flex items-center gap-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 border border-green-400/30 hover:border-green-400/50 rounded-full px-4 py-1.5 transition-all duration-300 backdrop-blur-sm"
+              href={INSTAGRAM_PROFILE_URL.replace("/embed", "")}
+              target="_blank"
+              className="md:text-xl group hover:bg-red-500/30 bg-white/5 sm:text-text-lg text-sm cursor-pointer hover:scale-105 transition-transform font-medium sm:p-1.5 p-1 rounded-full "
             >
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-green-300 group-hover:text-green-200 font-medium text-sm">
-                Free Quote
-              </span>
+              <FaInstagram
+                size={18}
+                className="text-red-400 group-hover:text-red-300 transition-colors duration-200"
+              />
+            </Link>
+            <Link
+              href={FACEBOOK_PAGE_URL}
+              target="_blank"
+              className="md:text-xl group hover:bg-blue-500/30 bg-white/5 sm:text-text-lg text-sm cursor-pointer hover:scale-105 transition-transform font-medium sm:p-1.5 p-1 rounded-full "
+            >
+              <FiFacebook
+                size={18}
+                className="text-blue-400 group-hover:text-blue-300 transition-colors duration-200"
+              />
             </Link>
           </div>
         </div>

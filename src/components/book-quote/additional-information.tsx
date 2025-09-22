@@ -143,7 +143,7 @@ export default function AdditionalInformationForm() {
                 [
                   { id: 'yes', name: 'Yes' },
                   { id: 'no', name: 'No' },
-                ] || []
+                ]
               }
               get="name"
               stateChange={(value) => setValue('driveway_status', value)}

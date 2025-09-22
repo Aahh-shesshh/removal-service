@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LucideArrowRightCircle } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
-import type { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LucideArrowRightCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { z } from "zod";
 
-import { data } from '@/data/services';
-import { f } from '@/lib/fetch';
-import { pathsWihtoutPrefix } from '@/services';
-import { schema } from '@/validators/contact';
+import { data } from "@/data/services";
+import { f } from "@/lib/fetch";
+import { pathsWihtoutPrefix } from "@/services";
+import { schema } from "@/validators/contact";
 
-import { Button } from '../ui/button';
-import { DateInput } from '../ui/date-input';
-import { FormInput } from '../ui/form-input';
-import { SelectInput } from '../ui/select-input';
+import { Button } from "../ui/button";
+import { DateInput } from "../ui/date-input";
+import { FormInput } from "../ui/form-input";
+import { SelectInput } from "../ui/select-input";
 
 export type TInquiryFormValues = z.infer<typeof schema>;
 
@@ -26,7 +26,7 @@ type TProps = {
 export default function ContactForm({ selected_service }: TProps) {
   const [isLoading, setIsLoading] = useState(false);
   const selectedService = data.list?.find(
-    (item) => item.id === selected_service,
+    (item) => item.id === selected_service
   );
 
   const {
@@ -37,7 +37,7 @@ export default function ContactForm({ selected_service }: TProps) {
     reset,
   } = useForm<TInquiryFormValues>({
     resolver: zodResolver(schema),
-    mode: 'onSubmit',
+    mode: "onSubmit",
     defaultValues: {
       service_type: selected_service?.toString(),
     },
@@ -47,17 +47,17 @@ export default function ContactForm({ selected_service }: TProps) {
     setIsLoading(true);
     await f({
       url: pathsWihtoutPrefix.CONTACT_FORM,
-      method: 'POST',
+      method: "POST",
       body: d,
       success:
         "Your message has been sent successfully! We'll get back to you soon.",
-      error: 'Something went wrong!',
+      error: "Something went wrong!",
     });
     setIsLoading(false);
     reset();
   };
   useEffect(() => {
-    if (selected_service) setValue('service_type', selected_service.toString());
+    if (selected_service) setValue("service_type", selected_service.toString());
   }, [selected_service, setValue]);
 
   return (
@@ -72,7 +72,7 @@ export default function ContactForm({ selected_service }: TProps) {
         type="text"
         required
         className="w-full"
-        register={register('full_name')}
+        register={register("full_name")}
         error={errors.full_name?.message}
       />
       <div className="flex items-center gap-4">
@@ -83,7 +83,7 @@ export default function ContactForm({ selected_service }: TProps) {
           required
           containerClassName="w-full"
           placeholder="Eg: johndoe@gmail.com"
-          register={register('email')}
+          register={register("email")}
           error={errors.email?.message}
         />
         <FormInput
@@ -92,11 +92,11 @@ export default function ContactForm({ selected_service }: TProps) {
           type="number"
           containerClassName="w-full"
           placeholder="Eg: 1234567890"
-          register={register('phone_number')}
+          register={register("phone_number")}
           error={errors.phone_number?.message}
         />
       </div>
-      {selectedService?.type === 'service' && (
+      {selectedService?.type === "service" && (
         <>
           <FormInput
             name="pickup_address"
@@ -104,7 +104,7 @@ export default function ContactForm({ selected_service }: TProps) {
             type="text"
             className="w-full"
             placeholder="Eg: 123, Some street, Some city, Some country - 123456"
-            register={register('pickup_address')}
+            register={register("pickup_address")}
             error={errors.phone_number?.message}
           />
           <FormInput
@@ -113,7 +113,7 @@ export default function ContactForm({ selected_service }: TProps) {
             type="text"
             className="w-full"
             placeholder="Eg: 123, Some street, Some city, Some country - 123456"
-            register={register('drop_address')}
+            register={register("drop_address")}
             error={errors.phone_number?.message}
           />
           <FormInput
@@ -122,13 +122,13 @@ export default function ContactForm({ selected_service }: TProps) {
             type="text"
             className="w-full"
             placeholder="Eg: 1st floor, 2nd floor, etc."
-            register={register('floor')}
+            register={register("floor")}
             error={errors.phone_number?.message}
           />
           <DateInput
             name="pickup_date"
             label="Pickup Date"
-            onChange={(date) => setValue('pickup_date', date)}
+            onChange={(date) => setValue("pickup_date", date)}
           />
           <SelectInput
             disabled={!!selected_service}
@@ -143,7 +143,7 @@ export default function ContactForm({ selected_service }: TProps) {
               })) || []
             }
             get="name"
-            stateChange={(value) => setValue('service_type', value)}
+            stateChange={(value) => setValue("service_type", value)}
           />
         </>
       )}
@@ -153,29 +153,27 @@ export default function ContactForm({ selected_service }: TProps) {
         type="textarea"
         required
         className="w-full"
-        register={register('message')}
+        register={register("message")}
         placeholder="Eg: Some message here..."
         error={errors.message?.message}
       />
 
-      {selectedService?.type === 'service' && (
+      {selectedService?.type === "service" && (
         <SelectInput
           name="driveway_status"
           placeholder="Select a driveway status..."
           label="Are there stairs or steep driveways at any locations?"
-          data={
-            [
-              { id: 'yes', name: 'Yes' },
-              { id: 'no', name: 'No' },
-            ] || []
-          }
+          data={[
+            { id: "yes", name: "Yes" },
+            { id: "no", name: "No" },
+          ]}
           get="name"
-          stateChange={(value) => setValue('driveway_status', value)}
+          stateChange={(value) => setValue("driveway_status", value)}
         />
       )}
       <div className="flex justify-end">
         <Button size="lg" type="submit">
-          {isLoading ? 'Sending...' : 'Send'}
+          {isLoading ? "Sending..." : "Send"}
           <LucideArrowRightCircle className="ml-3 -rotate-45" size={18} />
         </Button>
       </div>

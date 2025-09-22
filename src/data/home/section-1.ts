@@ -16,5 +16,5 @@ export const data = {
       title: 'Make your move worry-free!',
     },
   ],
-  image: '/images/hero.jpeg',
+  image: '/removal-pics/hero-image.jpg',
 };

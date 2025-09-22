@@ -1,17 +1,16 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
-import { data } from '@/data/services';
+import { data } from "@/data/services";
 
-import { Button } from '../ui/button';
+import { Button } from "../ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '../ui/carousel';
+} from "../ui/carousel";
 
 type TProps = {
   except: number;
@@ -26,7 +25,7 @@ export default function RelatedServices({ except }: TProps) {
       <div>
         <Carousel
           opts={{
-            align: 'start',
+            align: "start",
           }}
           className="w-full"
         >
@@ -39,13 +38,6 @@ export default function RelatedServices({ except }: TProps) {
                   className="py-4 transition-all duration-300 ease-in-out hover:-translate-y-2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
                 >
                   <div className="shadow-block border p-1">
-                    <Image
-                      className="mx-auto aspect-square w-full object-cover"
-                      src={item.images?.at(0) || item.icon}
-                      alt={item.title}
-                      width={200}
-                      height={200}
-                    />
                     <Button
                       asChild
                       variant="link"

@@ -1,8 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import * as React from 'react';
+import Link from "next/link";
+import * as React from "react";
 
 import {
   NavigationMenu,
@@ -12,14 +11,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { COMPANY_LOGO } from '@/data/constants';
-import { data } from '@/data/navigation';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/navigation-menu";
+import { data } from "@/data/navigation";
+import { cn } from "@/lib/utils";
 
 const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
@@ -27,8 +25,8 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            className,
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
           )}
           {...props}
         >
@@ -41,7 +39,7 @@ const ListItem = React.forwardRef<
     </li>
   );
 });
-ListItem.displayName = 'ListItem';
+ListItem.displayName = "ListItem";
 
 export function Menu() {
   const items = data.filter((item) => item.navbar);
@@ -70,14 +68,14 @@ export function Menu() {
                     <NavigationMenuLink asChild>
                       <Link
                         className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href={item.items.at(0)?.url || '/'}
+                        href={item.items.at(0)?.url || "/"}
                       >
-                        <Image
+                        {/* <Image
                           src={item.items.at(0)?.icon || COMPANY_LOGO}
                           alt={item.items.at(0)?.title || item.title}
                           width={180}
                           height={180}
-                        />
+                        /> */}
                         <div className="mb-2 mt-4 text-lg font-medium">
                           {item.items.at(0)?.title}
                         </div>
