@@ -46,12 +46,12 @@ export default function HeroSection() {
                 </span>
                 <br />
                 <span className="text-gray-900">
-                  {data.title.split(" ").slice(2, 6).join(" ")}
+                  {data.title.split(" ").slice(2, 5).join(" ")}
                 </span>
                 <br />
                 <span className="relative">
                   <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                    {data.title.split(" ").slice(6).join(" ")}
+                    {data.title.split(" ").slice(5).join(" ")}
                   </span>
                 </span>
               </h1>

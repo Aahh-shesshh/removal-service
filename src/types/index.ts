@@ -1,3 +1,5 @@
+import type { IconType } from "react-icons/lib";
+
 export type TPostCodeValidateResponse = {
   data: {
     address: string;
@@ -37,10 +39,10 @@ export type TAboutUsParagraph = {
 export type TService = {
   id: number;
   title: string;
-  type: 'service' | 'cleaning';
+  type: "service" | "cleaning";
   overview?: string;
   description?: string;
-  icon: string;
+  icon: IconType;
   images?: string[];
   page_data?: TServicePageData;
   slug: string;
