@@ -6,7 +6,7 @@ import ReviewCard from "./review-card";
 
 export default function ReviewsSection() {
   return (
-    <div className="relative space-y-16 lg:pb-20 pb-10" id="testimonials">
+    <div className="relative space-y-16 " id="testimonials">
       {/* Background decorations */}
       <div className="absolute -top-20 left-1/4 h-32 w-32 rounded-full bg-green-100/20" />
       <div className="absolute right-10 top-1/3 h-20 w-20 rounded-full bg-blue-100/20" />

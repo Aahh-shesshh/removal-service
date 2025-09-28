@@ -79,7 +79,7 @@ export default function PostCodeInput({ className }: TProps) {
     <form
       onSubmit={handleGo}
       className={cn(
-        'flex w-full md:w-4/5 gap-2 rounded-lg bg-brand/20 p-3 md:p-6',
+        'flex w-full md:w-4/5 gap-2 rounded-lg bg-[#dcfce7] p-3 md:p-6',
         className,
       )}
     >

@@ -4,6 +4,7 @@ import React from "react";
 import SelectServiceForm from "@/components/book-quote/select-service-form";
 import HeroSection from "@/components/home/hero-section";
 import OurProcessSection from "@/components/home/our-process-section";
+import ImageSection from "@/components/home/images-section";
 
 const AboutUsSection = dynamic(
   () => import("@/components/home/about-us-section"),
@@ -59,6 +60,7 @@ export default function Home() {
       <WhyUsSection />
       <AboutUsSection />
       <ReviewsSection />
+      <ImageSection />
     </div>
   );
 }
