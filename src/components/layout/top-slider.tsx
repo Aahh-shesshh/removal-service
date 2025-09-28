@@ -26,7 +26,7 @@ export default function TopSlider() {
       {/* Top gradient line */}
       <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent"></div>
 
-      <div className="py-3 px-6 relative z-10">
+      <div className="py-2 px-6 relative z-10">
         <div className="container mx-auto flex w-full text-sm text-white gap-6 items-center justify-between">
           {/* Left Section - Contact Info */}
           <div className="flex items-center gap-6">

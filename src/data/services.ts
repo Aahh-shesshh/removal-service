@@ -88,7 +88,7 @@ export const data: TServiceData = {
       page_data: {
         hero_title: "Compare removal quotes",
         hero_subtitle: "Get the best price for your move",
-        image: "/images/service/local-removal.jpeg",
+        image: "/removal-pics/onboarding.jpg",
         list: [
           {
             id: 1,
