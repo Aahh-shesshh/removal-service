@@ -60,7 +60,7 @@ export default function ServiceCard({
           <Button asChild variant="link" className="group/btn p-0 h-auto">
             <Link
               href={`/service/${slug}`}
-              className="flex items-center space-x-2 text-blue-600 transition-colors duration-300 hover:text-blue-700"
+              className="flex items-center space-x-2 bg-green-500 text-white p-2  transition-colors duration-300 "
             >
               <span className="sr-only">
                 Learn more about {title} by clicking

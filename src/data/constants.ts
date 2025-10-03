@@ -21,8 +21,10 @@ export const COMPANY_NAME = "Multi Removal & Cleaning Services";
 export const COMPANY_LOGO = "/logo/logo-svg.svg";
 export const COMPANY_LOGO_WHITE = "/logo/white-logo-svg.svg";
 export const COMPANY_INFO_EMAIL = "panta.multiservices@gmail.com";
-export const COMPANY_PHONE_NUMBER = "0410 936 413,  0491 388 096";
-export const COMPANY_ADDRESS = "60 Henley St, Lindisfarne TAS 7015, Australia";
+// export const COMPANY_PHONE_NUMBER = "0410 936 413,  0491 388 096";
+export const COMPANY_PHONE_NUMBER = "61 491 388 096";
+export const COMPANY_WHATSAPP_NUMBER = "61 491 388 096";
+export const COMPANY_ADDRESS = "7 Paringa Rd, Glenorchy TAS 7010, Australia";
 export const FACEBOOK_PAGE_URL =
   "https://www.facebook.com/p/Multi-removal-100066793002136/";
 export const INSTAGRAM_PROFILE_URL =
