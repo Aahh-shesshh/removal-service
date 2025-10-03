@@ -5,6 +5,7 @@ import SelectServiceForm from "@/components/book-quote/select-service-form";
 import HeroSection from "@/components/home/hero-section";
 import OurProcessSection from "@/components/home/our-process-section";
 import ImageSection from "@/components/home/images-section";
+import WhatsAppBtn from "@/components/whatsapp-btn";
 
 const AboutUsSection = dynamic(
   () => import("@/components/home/about-us-section"),
@@ -61,6 +62,7 @@ export default function Home() {
       <AboutUsSection />
       <ReviewsSection />
       <ImageSection />
+      <WhatsAppBtn />
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function ServicesSection() {
         description={data.description}
       />
 
-      <div className="relative z-10 columns-1 gap-6 space-y-6 md:columns-2 lg:gap-8 lg:space-y-8">
+      <div className="relative z-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {data.list?.map((review, i) => (
           <ServiceCard
             key={i}
