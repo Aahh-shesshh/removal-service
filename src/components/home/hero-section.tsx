@@ -1,3 +1,4 @@
+"use client";
 import {
   LucideArrowRight,
   LucideAward,
@@ -11,6 +12,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { data } from "@/data/home/section-1";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
@@ -33,13 +35,46 @@ export default function HeroSection() {
           {/* Left Content */}
           <div className="flex-1 space-y-8 text-center lg:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: -20 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    type: "spring",
+                    duration: 0.8,
+                    bounce: 0.3,
+                  },
+                },
+              }}
+              initial="hidden"
+              animate="show"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium"
+            >
               <LucideStar className="w-4 h-4 fill-current" />
               <span>Australia's #1 Removal Service</span>
-            </div>
+            </motion.div>
 
             {/* Main Heading with gradient text */}
-            <div className="space-y-6">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                show: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    type: "spring",
+                    duration: 0.8,
+                    delay: 0.2,
+                    bounce: 0.3,
+                  },
+                },
+              }}
+              initial="hidden"
+              animate="show"
+              className="space-y-6"
+            >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                   {data.title.split(" ").slice(0, 2).join(" ")}
@@ -61,10 +96,27 @@ export default function HeroSection() {
                 moving simple, stress-free, and affordable with our verified
                 professionals and guaranteed satisfaction.
               </p>
-            </div>
+            </motion.div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    type: "spring",
+                    duration: 1,
+                    delay: 0.4,
+                    bounce: 0.3,
+                  },
+                },
+              }}
+              initial="hidden"
+              animate="show"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
               <Link href="/book-quote/select-service">
                 <Button
                   size="xl"
@@ -85,11 +137,40 @@ export default function HeroSection() {
                   Book Service
                 </Button>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Trust indicators */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
-              <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15,
+                    delayChildren: 0.6,
+                  },
+                },
+              }}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8"
+            >
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.9 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      duration: 0.6,
+                      bounce: 0.3,
+                    },
+                  },
+                }}
+                className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+              >
                 <div className="p-2 bg-blue-100 rounded-lg">
                   <LucideShield className="w-5 h-5 text-blue-600" />
                 </div>
@@ -99,9 +180,24 @@ export default function HeroSection() {
                   </div>
                   <div className="text-sm text-gray-600">$2M Coverage</div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.9 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      duration: 0.6,
+                      bounce: 0.3,
+                    },
+                  },
+                }}
+                className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+              >
                 <div className="p-2 bg-green-100 rounded-lg">
                   <LucideStar className="w-5 h-5 text-green-600 fill-current" />
                 </div>
@@ -111,9 +207,24 @@ export default function HeroSection() {
                   </div>
                   <div className="text-sm text-gray-600">2000+ Reviews</div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20, scale: 0.9 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      duration: 0.6,
+                      bounce: 0.3,
+                    },
+                  },
+                }}
+                className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+              >
                 <div className="p-2 bg-yellow-100 rounded-lg">
                   <LucideAward className="w-5 h-5 text-yellow-600" />
                 </div>
@@ -123,14 +234,40 @@ export default function HeroSection() {
                   </div>
                   <div className="text-sm text-gray-600">Since 2018</div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Feature List with enhanced styling */}
-            <ul className="space-y-4 text-left max-w-md mx-auto lg:mx-0">
+            <motion.ul
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.9,
+                  },
+                },
+              }}
+              initial="hidden"
+              animate="show"
+              className="space-y-4 text-left max-w-md mx-auto lg:mx-0"
+            >
               {data.list?.map((item, i) => (
-                <li
+                <motion.li
                   key={i}
+                  variants={{
+                    hidden: { opacity: 0, x: -30 },
+                    show: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        type: "spring",
+                        duration: 0.5,
+                        bounce: 0.3,
+                      },
+                    },
+                  }}
                   className="flex items-start gap-4 p-3 bg-white/70 backdrop-blur-sm rounded-lg hover:bg-white transition-colors"
                 >
                   <div className="p-1 bg-green-100 rounded-full mt-1">
@@ -139,13 +276,31 @@ export default function HeroSection() {
                   <span className="text-gray-700 font-medium">
                     {item.title}
                   </span>
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </div>
 
           {/* Right Image with enhanced styling */}
-          <div className="flex-1 sticky  top-0 max-w-lg lg:max-w-none">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, x: 100, scale: 0.8 },
+              show: {
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                transition: {
+                  type: "spring",
+                  duration: 1,
+                  delay: 0.3,
+                  bounce: 0.3,
+                },
+              },
+            }}
+            initial="hidden"
+            animate="show"
+            className="flex-1 sticky top-0 max-w-lg lg:max-w-none"
+          >
             <div className="relative">
               {/* Main image container with gradient border */}
               <div className="relative p-1 bg-gradient-to-br from-blue-400 via-green-400 to-yellow-400 rounded-3xl">
@@ -163,17 +318,61 @@ export default function HeroSection() {
               </div>
 
               {/* Floating stat cards */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
-                <div className="sm:text-2xl text-lg font-bold text-green-600">10K+</div>
-                <div className="sm:text-sm text-xs text-gray-600">Happy Customers</div>
-              </div>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.8 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      duration: 0.8,
+                      delay: 1.2,
+                      bounce: 0.4,
+                    },
+                  },
+                }}
+                initial="hidden"
+                animate="show"
+                className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
+              >
+                <div className="sm:text-2xl text-lg font-bold text-green-600">
+                  10K+
+                </div>
+                <div className="sm:text-sm text-xs text-gray-600">
+                  Happy Customers
+                </div>
+              </motion.div>
 
-              <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
-                <div className="sm:text-2xl text-lg font-bold text-blue-600">24/7</div>
-                <div className="sm:text-sm text-xs text-gray-600">Support Available</div>
-              </div>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: -30, scale: 0.8 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      duration: 0.8,
+                      delay: 1.4,
+                      bounce: 0.4,
+                    },
+                  },
+                }}
+                initial="hidden"
+                animate="show"
+                className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
+              >
+                <div className="sm:text-2xl text-lg font-bold text-blue-600">
+                  24/7
+                </div>
+                <div className="sm:text-sm text-xs text-gray-600">
+                  Support Available
+                </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
