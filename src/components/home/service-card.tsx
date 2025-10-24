@@ -20,7 +20,7 @@ export default function ServiceCard({
   slug,
 }: TProps) {
   return (
-    <div className="group border border-green-400 relative inline-block w-full break-inside-avoid overflow-hidden rounded-2xl bg-gradient-to-br from-white to-gray-50/50 p-6 shadow-lg transition-all duration-500 ease-in-out hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-500/10 md:p-8">
+    <div className="group border h-full border-green-400 relative inline-block w-full break-inside-avoid overflow-hidden rounded-2xl bg-gradient-to-br from-white to-gray-50/50 p-6 shadow-lg transition-all duration-500 ease-in-out hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-500/10 md:p-8">
       {/* Background gradient overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-green-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
