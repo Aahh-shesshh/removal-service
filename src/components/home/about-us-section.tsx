@@ -21,7 +21,7 @@ export default function AboutUsSection() {
 
       <div className="relative z-10 flex flex-col items-stretch gap-8 lg:flex-row lg:gap-16">
         {/* Content Side */}
-        <div className="w-full space-y-8 lg:w-3/5">
+        <div className="w-full sm:px-0 px-3 space-y-8 lg:w-3/5">
           <TitleContainer
             title={data.title}
             subtitle={data.subtitle}
@@ -124,17 +124,16 @@ export default function AboutUsSection() {
 
         {/* Image Side */}
         <div className="w-full lg:w-[45%]">
-          <div className="relative h-full min-h-[400px] lg:min-h-[500px]">
+          <div className="relative h-[400px] lg:h-[500px]">
             {/* Image container with modern styling */}
             <div className="group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-blue-100 to-green-100 shadow-xl">
-              <div className="flex h-full w-full items-center justify-center">
-                <Image
-                  src="/removal-pics/members.jpg"
-                  alt="Our Professional Team"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
+              <Image
+                src="/removal-pics/members.jpg"
+                alt="Our Professional Team"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-contain transition-transform duration-700 group-hover:scale-105"
+              />
 
               {/* Team badge */}
               <div className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 shadow-sm backdrop-blur-sm">

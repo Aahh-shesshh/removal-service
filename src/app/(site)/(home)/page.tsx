@@ -34,7 +34,7 @@ const ReviewsSection = dynamic(
 
 export default function Home() {
   return (
-    <div className="layout size-full space-y-24">
+    <div className="layout size-full space-y-24 overflow-x-hidden">
       <HeroSection />
       <OurProcessSection />
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 via-white to-blue-50/30 p-8 shadow-lg md:p-12">

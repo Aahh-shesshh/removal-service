@@ -27,6 +27,7 @@ export default function WhyUsSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
+        className="sm:px-0 px-3"
       >
         <TitleContainer
           className="w-full md:w-3/5"
