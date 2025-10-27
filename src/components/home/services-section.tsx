@@ -40,7 +40,7 @@ export default function ServicesSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="relative z-10"
+        className="relative z-10 sm:px-0 px-3"
       >
         <TitleContainer
           className="w-full md:w-3/5"
@@ -56,14 +56,14 @@ export default function ServicesSection() {
           show: {
             opacity: 1,
             transition: {
-              staggerChildren: 0.15,
-              delayChildren: 0.3,
+              staggerChildren: 0.1,
+              delayChildren: 0.2,
             },
           },
         }}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.1 }}
         className="relative z-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
       >
         {data.list?.map((review, i) => (
@@ -72,18 +72,16 @@ export default function ServicesSection() {
             variants={{
               hidden: {
                 opacity: 0,
-                y: 50,
-                x: i % 2 === 0 ? -30 : 30,
-                scale: 0.9,
+                y: 30,
+                scale: 0.95,
               },
               show: {
                 opacity: 1,
                 y: 0,
-                x: 0,
                 scale: 1,
                 transition: {
                   type: "spring",
-                  duration: 0.8 * i,
+                  duration: 0.6,
                   bounce: 0.3,
                 },
               },
