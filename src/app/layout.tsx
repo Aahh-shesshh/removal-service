@@ -66,19 +66,23 @@ export async function generateMetadata(
         url: "/logo/logo-png.png",
       },
     ],
-    title: COMPANY_NAME,
+    // UPDATED: More SEO-friendly title
+    title: {
+      default: `${COMPANY_NAME} | Professional Removalists & Movers in Hobart, Tasmania`,
+      template: `%s | ${COMPANY_NAME}`,
+    },
     publisher: "Aarambha IT Research Center",
     keywords: generateKeywords(data?.description || ""),
     abstract: data.description || abstract,
     authors: [
       {
-        name: "Aakash Acharya",
-        url: "https://aakashacharya.com.np/",
+        name: "Ashish Khatri",
+        url: "https://ashishkhatri.vercel.app/",
       },
     ],
     category: "Service",
     classification: "Removal Service",
-    creator: "Aakash Acharya",
+    creator: "Ashish Khatri",
     generator: "Next.js",
     robots: "index, follow",
     verification: {
