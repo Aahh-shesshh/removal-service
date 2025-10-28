@@ -1,6 +1,6 @@
-import { type ClassValue, clsx } from "clsx";
-import type { FieldValues, Path, UseFormSetError } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,7 +11,7 @@ export function objectToURLSearchParams(obj: Record<string, any>) {
   Object.entries(obj).forEach(([key, value]) => {
     let n = value;
 
-    if (typeof value === "number") n = value.toString();
+    if (typeof value === 'number') n = value.toString();
     if (n) params.append(key, n);
   });
 
@@ -21,10 +21,10 @@ export function objectToURLSearchParams(obj: Record<string, any>) {
 export const parseBackendValidation = async <T extends FieldValues, E>(
   res: T,
   setErrors: UseFormSetError<T>,
-  returnErrors?: boolean
+  returnErrors?: boolean,
 ): Promise<(Partial<T> & E) | void> => {
-  const isServer = typeof window === "undefined";
-  const toast = !isServer && (await import("react-hot-toast")).toast;
+  const isServer = typeof window === 'undefined';
+  const toast = !isServer && (await import('react-hot-toast')).toast;
 
   const errors = res as Partial<T> & E;
 
@@ -32,17 +32,17 @@ export const parseBackendValidation = async <T extends FieldValues, E>(
     setErrors(
       key as keyof T as Path<T>,
       {
-        type: "manual",
+        type: 'manual',
         message: value || "Something's wrong.",
       },
       {
         shouldFocus: true,
-      }
+      },
     );
   });
 
   if (toast) {
-    toast.error("Please fix current errors and try again.");
+    toast.error('Please fix current errors and try again.');
   }
 
   if (returnErrors) return errors;
@@ -64,9 +64,9 @@ export const parseToFormData = (data: { [key: string]: any }) => {
       for (let i = 0; i < value.length; i += 1) {
         formData.append(key, value[i] as File);
       }
-    } else if (typeof value === "object" && value !== null) {
+    } else if (typeof value === 'object' && value !== null) {
       formData.append(key, JSON.stringify(value));
-    } else if (String(value) && typeof value !== "undefined") {
+    } else if (String(value) && typeof value !== 'undefined') {
       formData.append(key, String(value));
     }
   });
@@ -75,44 +75,19 @@ export const parseToFormData = (data: { [key: string]: any }) => {
 };
 
 export const generateKeywords = (description?: string) => {
-  // Primary keywords for Hobart removalist business
-  const primaryKeywords = [
-    "removal in hobart",
-    "mover in hobart",
-    "cheap removal",
-    "best removal in hobart",
-    "two man and van",
-    "affordable removal hobart",
-    "house office relocation hobart tas",
-    "removal service hobart tas",
-    "removalists hobart",
-    "furniture removalists hobart",
-    "removalist hobart tasmania",
-    "moving company hobart",
-    "professional movers hobart",
-    "interstate removalists hobart",
-    "local removalists hobart",
-    "office relocation hobart",
-    "house movers hobart",
-    "piano movers hobart",
-    "furniture movers hobart",
-    "storage hobart",
-    "packing services hobart",
-    "cleaning services hobart",
-    "end of lease cleaning hobart",
-    "multi removal and cleaning experts",
-  ];
+  const desc = description?.split(' ');
 
-  // Add description-based keywords if needed
-  const descKeywords = description
-    ? description
-        .toLowerCase()
-        .split(/[,.\s]+/)
-        .filter((word) => word.length > 3)
-    : [];
+  if (!desc) return [''];
 
-  // Combine and deduplicate
-  return [...new Set([...primaryKeywords, ...descKeywords])];
+  const descLength = desc.length;
+  const descCombination = [];
+
+  for (let i = 0; i < descLength; i += 1) {
+    for (let j = i; j < descLength; j += 1) {
+      descCombination.push(desc.slice(i, j + 1).join(' '));
+    }
+  }
+  return descCombination;
 };
 export const genSeq = (length: number) => {
   const repsOf3 = length / 3;
