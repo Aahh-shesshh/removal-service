@@ -34,7 +34,7 @@ const ImageSection = () => {
   const visibleImages = getVisibleImages();
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="pb-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
