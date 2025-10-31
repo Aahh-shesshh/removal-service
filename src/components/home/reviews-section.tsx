@@ -16,7 +16,7 @@ export default function ReviewsSection() {
   const qrCodeUrl = `/review.png`;
 
   return (
-    <div className="relative pt-16 px-4 sm:px-6 lg:px-8" id="testimonials">
+    <div className="relative pt-16 px-4" id="testimonials">
       {/* Background decorations */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
