@@ -3,26 +3,25 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata, ResolvingMetadata, Viewport } from "next";
 import {
-  Bungee_Shade as Font2,
   Hanken_Grotesk as Font,
+  Bungee_Shade as Font2,
 } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 
+import Navbar from "@/components/layout/navbar";
+import TopSlider from "@/components/layout/top-slider";
 import BookQuoteContextProvider from "@/context/book-quote";
 import { data } from "@/data/about-us";
 import {
   COMPANY_NAME,
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   NEXT_PUBLIC_GTAG_ID,
-  NEXT_PUBLIC_MAPS_API_KEY,
   NEXT_PUBLIC_SITE_URL,
-  SITE_URL,
+  SITE_URL
 } from "@/data/constants";
 import { cn, generateKeywords } from "@/lib/utils";
-import Navbar from "@/components/layout/navbar";
-import TopSlider from "@/components/layout/top-slider";
 
 const font = Font({
   subsets: ["latin"],
@@ -126,12 +125,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_MAPS_API_KEY}&libraries=places`}
-        async
-        defer
-      />
-     
+
       <body className={cn(font.variable, font2.variable, "relative")}>
         <noscript>
           <iframe

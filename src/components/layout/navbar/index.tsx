@@ -1,15 +1,17 @@
 "use client";
 
-import { LucideMenu } from "lucide-react";
+import { LucideMenu, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import { Button } from "@/components/ui/button";
-import { COMPANY_LOGO, SITE_URL } from "@/data/constants";
+import {
+  COMPANY_LOGO,
+  COMPANY_WHATSAPP_NUMBER,
+  SITE_URL,
+} from "@/data/constants";
 import { cn } from "@/lib/utils";
-import { BsChatQuoteFill } from "react-icons/bs";
 import { Menu } from "./menu";
 
 const MobileDrawer = dynamic(() => import("./mobile-drawer"), {
@@ -45,14 +47,19 @@ export default function Navbar() {
           <Menu />
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/book-quote">
+          <Link href={`tel:${COMPANY_WHATSAPP_NUMBER}`}>
             <Button
               variant="success"
               type="submit"
               className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold sm:px-6 px-4 sm:py-3 py-2 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-green-500/20 hover:border-green-400/30"
             >
-              <span className="sm:block hidden">Request a quote</span>
-              <BsChatQuoteFill className="sm:hidden block" />
+              <div className="p-1 rounded-full bg-green-500/20 group-hover:bg-green-500/30 transition-colors duration-200">
+                <Phone
+                  size={16}
+                  className="text-green-400 group-hover:text-green-300 transition-colors duration-200"
+                />
+              </div>
+              <span className="ml-2">{COMPANY_WHATSAPP_NUMBER}</span>
             </Button>
           </Link>
           <MobileDrawer />
