@@ -131,6 +131,7 @@ export default function RootLayout({
         async
         defer
       />
+     
       <body className={cn(font.variable, font2.variable, "relative")}>
         <noscript>
           <iframe
