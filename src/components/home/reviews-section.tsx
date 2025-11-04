@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import TitleContainer from "../title-container";
 import { motion } from "framer-motion";
 import {
@@ -9,11 +9,57 @@ import {
   LucideArrowRight,
 } from "lucide-react";
 import Image from "next/image";
-import Script from "next/script";
 
 export default function ReviewsSection() {
   const reviewLink = "https://g.page/r/Cf9N7jdlGcScEBE/review";
   const qrCodeUrl = `/review.png`;
+  const scriptLoadedRef = useRef(false);
+
+  useEffect(() => {
+    // Only load script once
+    if (scriptLoadedRef.current) return;
+    scriptLoadedRef.current = true;
+
+    const scriptId = "trustindex-script";
+
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src =
+        "https://cdn.trustindex.io/loader.js?f67ef9857139349b4486deb8a54";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    // Observer to remove widgets appearing outside testimonials section
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) {
+            const element = node as Element;
+            // Check if it's a TrustIndex widget added directly to body
+            if (
+              element.parentElement === document.body &&
+              (element.classList.contains("ti-widget-container") ||
+                element.className?.includes("trustindex") ||
+                element.id?.includes("trustindex"))
+            ) {
+              element.remove();
+            }
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: false,
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div className="relative pt-16 px-4" id="testimonials">
@@ -97,7 +143,7 @@ export default function ReviewsSection() {
               </div>
             </motion.div>
 
-            {/* Google Reviews Widget - No wrapper */}
+            {/* Google Reviews Widget */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -229,21 +275,37 @@ export default function ReviewsSection() {
                   </a>
                 </div>
               </div>
-
-              
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Trustindex Script Loader */}
-      <Script
-        src="https://cdn.trustindex.io/loader.js?f67ef9857139349b4486deb8a54"
-        strategy="afterInteractive"
-      />
-
       {/* Custom styling to match your design theme */}
       <style jsx global>{`
+        /* Aggressive hiding of TrustIndex elements outside testimonials */
+        body > .ti-widget-container,
+        body > div[class*="trustindex"],
+        body > div[id*="trustindex"],
+        body > div[class*="ti-"],
+        body > div[id*="ti-"] {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          height: 0 !important;
+          overflow: hidden !important;
+        }
+
+        /* Only show within testimonials section */
+        #testimonials .ti-widget-container,
+        #testimonials div[class*="trustindex"],
+        #testimonials div[id*="trustindex"] {
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          height: auto !important;
+          overflow: visible !important;
+        }
+
         .trustindex-reviews-container {
           width: 100%;
           min-height: 400px;
