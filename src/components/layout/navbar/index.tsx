@@ -59,7 +59,7 @@ export default function Navbar() {
                   className="text-green-400 group-hover:text-green-300 transition-colors duration-200"
                 />
               </div>
-              <span className="ml-2">{COMPANY_WHATSAPP_NUMBER}</span>
+              <span className="sm:block hidden ml-2">{COMPANY_WHATSAPP_NUMBER}</span>
             </Button>
           </Link>
           <MobileDrawer />
