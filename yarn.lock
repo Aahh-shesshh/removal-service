@@ -5420,6 +5420,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"google-reviews-widget@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "google-reviews-widget@npm:1.0.4"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/dd8eb68eb46f2c4bbcb7dcfa6b6fb468162319bc154bf589516a792b1e78c1ecbb810f7bfc64104bb85ba48c03bd5e89483da2d413cb9966296385a9b11edd8c
+  languageName: node
+  linkType: hard
+
 "gopd@npm:^1.0.1":
   version: 1.0.1
   resolution: "gopd@npm:1.0.1"
@@ -7487,6 +7496,7 @@ __metadata:
     eslint-plugin-unused-imports: "npm:^3.1.0"
     express-handlebars: "npm:^7.1.2"
     framer-motion: "npm:^11.13.1"
+    google-reviews-widget: "npm:^1.0.4"
     husky: "npm:^9.0.11"
     lint-staged: "npm:^15.2.2"
     lucide-react: "npm:^0.330.0"

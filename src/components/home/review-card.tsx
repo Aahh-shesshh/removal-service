@@ -20,7 +20,7 @@ export default function ReviewCard({
   title,
 }: Partial<TProps>) {
   return (
-    <div className="group relative inline-block w-full break-inside-avoid overflow-hidden rounded-2xl bg-gradient-to-br from-white to-gray-50/30 p-6 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 md:p-8">
+    <div className="group relative inline-block w-full h-f break-inside-avoid overflow-hidden rounded-2xl bg-gradient-to-br from-white to-gray-50/30 p-6 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 md:p-8">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-green-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
