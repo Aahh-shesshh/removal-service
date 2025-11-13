@@ -19,7 +19,7 @@ import {
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   NEXT_PUBLIC_GTAG_ID,
   NEXT_PUBLIC_SITE_URL,
-  SITE_URL
+  SITE_URL,
 } from "@/data/constants";
 import { cn, generateKeywords } from "@/lib/utils";
 
@@ -157,7 +157,7 @@ export default function RootLayout({
             />
             <TopSlider />
             <Navbar />
-            {children}
+              {children}
           </BookQuoteContextProvider>
         </Suspense>
       </body>

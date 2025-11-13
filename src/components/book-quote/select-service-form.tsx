@@ -16,6 +16,10 @@ export default function SelectServiceForm() {
   const code = useSearchParams().get("post-code");
   const { state, setState } = useBookQuoteCtx();
 
+  console.log("state", state);
+  console.log("code", code);
+  
+
   const handleClick = (service: string, type: string) => {
     setState({
       ...state,
