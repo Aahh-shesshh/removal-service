@@ -124,6 +124,17 @@ export default function RootLayout({
       })(window,document,'script','dataLayer','GTM-NNRDB9XD');`,
           }}
         />
+        <Script
+          async
+          defer
+          crossOrigin="use-credentials"
+          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"
+          nonce="a4aZUlBd"
+        />
+        <Script
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_MAPS_API_KEY}&libraries=places`}
+          strategy="beforeInteractive"
+        />
       </head>
 
       <body className={cn(font.variable, font2.variable, "relative")}>
@@ -138,13 +149,7 @@ export default function RootLayout({
           />
         </noscript>
         <div id="fb-root" />
-        <Script
-          async
-          defer
-          crossOrigin="use-credentials"
-          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"
-          nonce="a4aZUlBd"
-        />
+
         <Suspense>
           <BookQuoteContextProvider>
             <Toaster
@@ -157,7 +162,8 @@ export default function RootLayout({
             />
             <TopSlider />
             <Navbar />
-              {children}
+
+            {children}
           </BookQuoteContextProvider>
         </Suspense>
       </body>

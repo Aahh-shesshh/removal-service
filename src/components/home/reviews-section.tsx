@@ -138,7 +138,7 @@ export default function ReviewsSection() {
               className="relative"
             >
               {/* Carousel Container */}
-              <div className="relative overflow-hidden rounded-2xl">
+              <div className="relative overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 ">
                   <AnimatePresence mode="wait">
                     {getCurrentReviews().map((review, i) => (
