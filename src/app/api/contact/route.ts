@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     await sendMail({
-      template: 'contact.template',
+      template: '`contact`.template',
       context: body,
       subject: 'New Contact Request',
       to: EMAIL_USER!,

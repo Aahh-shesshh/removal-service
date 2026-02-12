@@ -20,7 +20,7 @@ export const IS_DEV = NODE_ENV === "development";
 export const COMPANY_NAME = "Multi Removal & Cleaning Services";
 export const COMPANY_LOGO = "/logo/logo-svg.svg";
 export const COMPANY_LOGO_WHITE = "/logo/white-logo-svg.svg";
-export const COMPANY_INFO_EMAIL = "panta.multiservices@gmail.com";
+export const COMPANY_INFO_EMAIL = "pantaservices@multiremovalservices.com";
 // export const COMPANY_PHONE_NUMBER = "0410 936 413,  0491 388 096";
 export const COMPANY_PHONE_NUMBER = "61 491 388 096";
 export const COMPANY_WHATSAPP_NUMBER = "61 491 388 096";
