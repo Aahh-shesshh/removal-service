@@ -15,10 +15,9 @@ import { Button } from "../ui/button";
 export default function SelectServiceForm() {
   const code = useSearchParams().get("post-code");
   const { state, setState } = useBookQuoteCtx();
-
-  console.log("state", state);
+  // console.log("state", state);
   console.log("code", code);
-  
+  console.log("code", state?.service);
 
   const handleClick = (service: string, type: string) => {
     setState({
