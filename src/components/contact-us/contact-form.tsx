@@ -1,17 +1,14 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LucideArrowRightCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-
 import { data } from "@/data/services";
-import { f } from "@/lib/fetch";
 import { pathsWihtoutPrefix } from "@/services";
 import { schema } from "@/validators/contact";
-
+import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { DateInput } from "../ui/date-input";
 import { FormInput } from "../ui/form-input";
@@ -26,9 +23,10 @@ type TProps = {
 export default function ContactForm({ selected_service }: TProps) {
   const [isLoading, setIsLoading] = useState(false);
   const selectedService = data.list?.find(
-    (item) => item.id === selected_service
+    (item) => item.id === selected_service,
   );
-
+  const getServiceTitle = (id?: number) =>
+    data.list?.find((s) => s.id === id)?.title ?? "Local Removals in Hobart";
   const {
     register,
     formState: { errors },
@@ -39,26 +37,36 @@ export default function ContactForm({ selected_service }: TProps) {
     resolver: zodResolver(schema),
     mode: "onSubmit",
     defaultValues: {
-      service_type: selected_service?.toString(),
+      service_type: getServiceTitle(selected_service),
     },
   });
 
-  const onSubmit: SubmitHandler<TInquiryFormValues> = async (d) => {
-    setIsLoading(true);
-    await f({
-      url: pathsWihtoutPrefix.CONTACT_FORM,
-      method: "POST",
-      body: d,
-      success:
-        "Your message has been sent successfully! We'll get back to you soon.",
-      error: "Something went wrong!",
-    });
-    setIsLoading(false);
-    reset();
-  };
 
+  const onSubmit: SubmitHandler<TInquiryFormValues> = async (formData) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(pathsWihtoutPrefix.CONTACT_FORM, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!res.ok) {
+        toast.error("Failed to send message");
+        return;
+      }
+
+      reset();
+      toast.success("Message sent successfully");
+    } catch {
+      toast.error("Something went wrong!");
+    } finally {
+      setIsLoading(false); // always runs
+    }
+  };
   useEffect(() => {
-    if (selected_service) setValue("service_type", selected_service.toString());
+    if (selected_service)
+      setValue("service_type", getServiceTitle(selected_service));
   }, [selected_service, setValue]);
 
   return (

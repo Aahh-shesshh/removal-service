@@ -9,6 +9,7 @@ import {
 import Script from "next/script";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
+import NextTopLoader from "nextjs-toploader";
 
 import Navbar from "@/components/layout/navbar";
 import TopSlider from "@/components/layout/top-slider";
@@ -48,7 +49,7 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(
   _: P,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { abstract, description, openGraph, twitter } = await parent;
 
@@ -149,7 +150,7 @@ export default function RootLayout({
           />
         </noscript>
         <div id="fb-root" />
-
+        <NextTopLoader color="#16a049" showSpinner={false} zIndex={6000} />
         <Suspense>
           <BookQuoteContextProvider>
             <Toaster

@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LucideArrowRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import React, { useMemo } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LucideArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useMemo } from "react";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { useBookQuoteCtx } from '@/context/book-quote';
-import { f } from '@/lib/fetch';
-import { pathsWihtoutPrefix } from '@/services';
+import { useBookQuoteCtx } from "@/context/book-quote";
+// import { f } from '@/lib/fetch';
+import { pathsWihtoutPrefix } from "@/services";
 
-import { Button } from '../ui/button';
-import { DateInput } from '../ui/date-input';
-import { FormInput } from '../ui/form-input';
-import { SelectInput } from '../ui/select-input';
+import toast from "react-hot-toast";
+import { Button } from "../ui/button";
+import { DateInput } from "../ui/date-input";
+import { FormInput } from "../ui/form-input";
+import { SelectInput } from "../ui/select-input";
 
 const schema = z.object({
   full_name: z.string().min(1),
@@ -30,7 +31,7 @@ export type TAdditionalInformationFormValues = z.infer<typeof schema>;
 
 export default function AdditionalInformationForm() {
   const [isLoading, setIsLoading] = React.useState(false);
-  const { state, setState } = useBookQuoteCtx();
+  const { state } = useBookQuoteCtx();
 
   const { push } = useRouter();
 
@@ -39,6 +40,7 @@ export default function AdditionalInformationForm() {
     register,
     handleSubmit,
     setValue,
+    reset,
   } = useForm<TAdditionalInformationFormValues>({
     resolver: zodResolver(schema),
   });
@@ -55,21 +57,49 @@ export default function AdditionalInformationForm() {
     [state],
   );
 
+  // const onSubmit: SubmitHandler<TAdditionalInformationFormValues> = async (
+  //   d,
+  // ) => {
+  //   setIsLoading(true);
+  //   setState({ ...state, ...d });
+  //   await f({
+  //     url: pathsWihtoutPrefix.QUOTE_FORM,
+  //     method: 'POST',
+  //     body: { ...state, ...d },
+  //     success:
+  //       'Your message has been sent successfully! We will get back to you soon.',
+  //     error: 'Something went wrong!',
+  //   });
+  //   push('/');
+  //   setIsLoading(false);
+  // };
+
   const onSubmit: SubmitHandler<TAdditionalInformationFormValues> = async (
-    d,
+    formData,
   ) => {
     setIsLoading(true);
-    setState({ ...state, ...d });
-    await f({
-      url: pathsWihtoutPrefix.QUOTE_FORM,
-      method: 'POST',
-      body: { ...state, ...d },
-      success:
-        'Your message has been sent successfully! We will get back to you soon.',
-      error: 'Something went wrong!',
-    });
-    push('/');
-    setIsLoading(false);
+    try {
+      const res = await fetch(pathsWihtoutPrefix.CONTACT_FORM, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!res.ok) {
+        toast.error("Failed to send message");
+        return;
+      }
+
+      reset();
+      toast.success(
+        "Request submitted successfully. We will get back to you soon.",
+      );
+      push("/");
+    } catch {
+      toast.error("Something went wrong!");
+    } finally {
+      setIsLoading(false); // always runs
+    }
   };
 
   return (
@@ -82,7 +112,7 @@ export default function AdditionalInformationForm() {
               label="Full Name"
               placeholder="Eg. John Doe"
               error={errors.full_name?.message}
-              register={register('full_name')}
+              register={register("full_name")}
               containerClassName="w-full"
             />
             <FormInput
@@ -90,17 +120,17 @@ export default function AdditionalInformationForm() {
               label="Email"
               placeholder="Eg. johndoe@gmail.com"
               error={errors.email?.message}
-              register={register('email')}
+              register={register("email")}
               containerClassName="w-full"
             />
           </div>
           <div className="flex items-center gap-4">
-            {state?.type === 'service' && (
+            {state?.type === "service" && (
               <DateInput
                 name="pickup_date"
                 label="Pickup Date"
                 onChange={(value) => {
-                  setValue('pickup_date', value);
+                  setValue("pickup_date", value);
                 }}
                 containerClassName="w-full"
               />
@@ -110,19 +140,19 @@ export default function AdditionalInformationForm() {
               name="phone_number"
               label="Phone Number"
               placeholder="Eg. 4XX XXX XXX"
-              register={register('phone_number')}
+              register={register("phone_number")}
               error={errors.phone_number?.message}
               containerClassName="w-full"
             />
           </div>
-          {state?.type === 'service' && (
+          {state?.type === "service" && (
             <FormInput
               name="floor"
               label="Floor"
               type="text"
               className="w-full"
               placeholder="Eg: 1st floor, 2nd floor, etc."
-              register={register('floor')}
+              register={register("floor")}
               error={errors.phone_number?.message}
             />
           )}
@@ -132,21 +162,19 @@ export default function AdditionalInformationForm() {
             label="Message"
             placeholder="Eg. Extra information about the request"
             error={errors.message?.message}
-            register={register('message')}
+            register={register("message")}
           />
-          {state?.type === 'service' && (
+          {state?.type === "service" && (
             <SelectInput
               name="driveway_status"
               placeholder="Select a driveway status..."
               label="Are there stairs or steep driveways at any locations?"
-              data={
-                [
-                  { id: 'yes', name: 'Yes' },
-                  { id: 'no', name: 'No' },
-                ]
-              }
+              data={[
+                { id: "yes", name: "Yes" },
+                { id: "no", name: "No" },
+              ]}
               get="name"
-              stateChange={(value) => setValue('driveway_status', value)}
+              stateChange={(value) => setValue("driveway_status", value)}
             />
           )}
         </div>

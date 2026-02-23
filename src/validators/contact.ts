@@ -16,3 +16,16 @@ export const schema = z.object({
   floor: z.string().optional(),
   driveway_status: z.string().optional(),
 });
+
+export const combinedSchema = z.object({
+  full_name: z.string().min(1),
+  email: z.string().email(),
+  phone_number: z.string().optional(),
+  pickup_date: z.string().optional(),
+  message: z.string().min(1),
+  floor: z.string().optional(),
+  driveway_status: z.string().optional(),
+  service_type: z.string().optional(),   // only contact form sends this
+  pickup_address: z.string().optional(), // only contact form sends this
+  drop_address: z.string().optional(),   // only contact form sends this
+});
