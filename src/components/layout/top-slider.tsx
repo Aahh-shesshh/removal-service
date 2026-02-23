@@ -70,7 +70,7 @@ export default function TopSlider() {
                 />
               </div>
               <Link
-                href="mailto:info@multiremoval.com.au"
+                href={`mailto:${COMPANY_INFO_EMAIL}`}
                 className="hover:text-blue-300 transition-colors duration-200 font-medium"
               >
                 {COMPANY_INFO_EMAIL}
