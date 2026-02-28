@@ -3,7 +3,12 @@ import Link from "next/link";
 import React from "react";
 import { FiFacebook } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
-import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaPhone,
+  FaEnvelope,
+  FaArrowRight,
+} from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,16 +35,16 @@ export default function Footer() {
 
         <div className="layout relative z-10 flex flex-col items-stretch gap-12 p-10 md:flex-row md:gap-16">
           {/* Left Content Section */}
-          <div className="w-full space-y-10">
+          <div className="w-full space-y-8">
             {/* Logo and Motto */}
             <div className="space-y-2">
-                <Image
-                  src={"/logo/white-logo-png.png"}
-                  alt="logo"
-                  width={200}
-                  height={80}
-                  className="h-auto w-auto"
-                />
+              <Image
+                src={"/logo/white-logo-png.png"}
+                alt="logo"
+                width={200}
+                height={80}
+                className="h-auto w-auto"
+              />
               <div className="space-y-2">
                 <h3 className="text-2xl font-bold text-white md:text-3xl">
                   {data.motto}
@@ -48,65 +53,67 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Menu Grid */}
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {data.menu?.map((item, i) => (
-                <div key={i} className="group   space-y-4">
-                  <div className="flex w-full  items-center space-x-2">
-                    <div className="h-2 w-2 rounded-full bg-green-400" />
-                    <h4 className="text-lg font-bold text-white transition-colors duration-300 group-hover:text-green-200">
-                      {item.title}
-                    </h4>
-                  </div>
-                  <ul className="space-y-2">
-                    {item.items.map((subItem, j) => (
-                      <li key={j}>
-                        <Button
-                          variant="link"
-                          asChild
-                          className="h-auto p-0 text-white/80 hover:text-white transition-colors duration-300"
+            {/* Combined Get in Touch + Quick Links */}
+            <div className="rounded-2xl backdrop-blur-sm space-y-6">
+              {/* Quick Links from menu data */}
+              <div>
+                <h4 className="mb-4 text-lg font-bold text-white">
+                  Quick Links
+                </h4>
+                <div className="grid grid-cols-1 gap-x-6 gap-y-1 sm:grid-cols-2">
+                  {data.menu?.flatMap((item) =>
+                    item.items.map((subItem, j) => (
+                      <Button
+                        key={`${item.title}-${j}`}
+                        variant="link"
+                        asChild
+                        className="h-auto justify-start p-0 text-white/75 hover:text-green-400 transition-colors duration-300"
+                      >
+                        <Link
+                          href={subItem.url}
+                          scroll
+                          className="flex items-center space-x-2 py-1 hover:translate-x-1 transition-transform duration-300"
                         >
-                          <Link
-                            href={subItem.url}
-                            scroll
-                            className="flex items-center space-x-2 hover:translate-x-1 transition-transform duration-300"
-                          >
-                            <span className="h-1 w-1 rounded-full bg-white/60" />
-                            <span>{subItem.title}</span>
-                          </Link>
-                        </Button>
-                      </li>
-                    ))}
-                  </ul>
+                          <FaArrowRight className="h-2.5 w-2.5 text-green-400/70" />
+                          <span className="text-sm">{subItem.title}</span>
+                        </Link>
+                      </Button>
+                    )),
+                  )}
                 </div>
-              ))}
-            </div>
-
-            {/* Contact Info */}
-            <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-              <h4 className="mb-4 text-lg font-bold text-white">
-                Get in Touch
-              </h4>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3 text-white/90">
-                  <FaMapMarkerAlt className="h-4 w-4 text-green-400" />
-                  <span className="text-sm">{COMPANY_ADDRESS}</span>
-                </div>
-                <Link
-                  href={`tel:${COMPANY_PHONE_NUMBER}`}
-                  className="flex items-center space-x-3 text-white/90 hover:text-green-400 transition-colors duration-300 hover:underline"
-                >
-                  <FaPhone className="h-4 w-4 text-green-400" />
-                  <span className="text-sm">{COMPANY_PHONE_NUMBER}</span>
-                </Link>
-                <Link
-                  href={`mailto:${COMPANY_INFO_EMAIL}`}
-                  className="flex items-center space-x-3 text-white/90 hover:text-green-400 transition-colors duration-300 hover:underline"
-                >
-                  <FaEnvelope className="h-4 w-4 text-green-400" />
-                  <span className="text-sm">{COMPANY_INFO_EMAIL}</span>
-                </Link>
               </div>
+               {/* Divider */}
+              <div className="h-px w-full bg-gradient-to-r from-white/20 via-green-400/30 to-transparent" />
+              {/* Contact Info */}
+              <div>
+                <h4 className="mb-4 text-lg font-bold text-white">
+                  Get in Touch
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3 text-white/90">
+                    <FaMapMarkerAlt className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+                    <span className="text-sm">{COMPANY_ADDRESS}</span>
+                  </div>
+                  <Link
+                    href={`tel:${COMPANY_PHONE_NUMBER}`}
+                    className="flex items-center space-x-3 text-white/90 hover:text-green-400 transition-colors duration-300 hover:underline"
+                  >
+                    <FaPhone className="h-4 w-4 shrink-0 text-green-400" />
+                    <span className="text-sm">{COMPANY_PHONE_NUMBER}</span>
+                  </Link>
+                  <Link
+                    href={`mailto:${COMPANY_INFO_EMAIL}`}
+                    className="flex items-center space-x-3 text-white/90 hover:text-green-400 transition-colors duration-300 hover:underline"
+                  >
+                    <FaEnvelope className="h-4 w-4 shrink-0 text-green-400" />
+                    <span className="text-sm">{COMPANY_INFO_EMAIL}</span>
+                  </Link>
+                </div>
+              </div>
+
+             
+
+              
             </div>
 
             {/* Social Media */}
@@ -136,21 +143,43 @@ export default function Footer() {
           </div>
 
           {/* Right Map Section */}
-          <div className="w-full">
-            <div className="group overflow-hidden rounded-2xl shadow-2xl">
-              <div className="relative">
-                <iframe
-                  title="company-location"
-                  src={COMPANY_GOOGLE_MAP_IFRAME}
-                  width="100%"
-                  height="450"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  className="transition-all duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="w-full space-y-4">
+            {/* Map Header */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-400/20 ring-1 ring-green-400/40">
+                  <FaMapMarkerAlt className="h-5 w-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-white tracking-wide">
+                    Find Us Here
+                  </h4>
+                  <p className="text-sm text-white/60">
+                    We&apos;d love to meet you in person
+                  </p>
+                </div>
               </div>
+              <div className="h-px w-full bg-gradient-to-r from-green-400/60 via-blue-400/40 to-transparent" />
+            </div>
+
+            {/* Map */}
+            <div className="group overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
+              <iframe
+                title="company-location"
+                src={COMPANY_GOOGLE_MAP_IFRAME}
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                className="transition-all duration-300 group-hover:scale-105"
+              />
+            </div>
+
+            {/* Address pill below map */}
+            <div className="flex items-center space-x-2 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm">
+              <FaMapMarkerAlt className="h-4 w-4 shrink-0 text-green-400" />
+              <span className="text-sm text-white/80">{COMPANY_ADDRESS}</span>
             </div>
           </div>
         </div>

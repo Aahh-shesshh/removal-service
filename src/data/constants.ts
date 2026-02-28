@@ -29,8 +29,10 @@ export const FACEBOOK_PAGE_URL =
   "https://www.facebook.com/p/Multi-removal-100066793002136/";
 export const INSTAGRAM_PROFILE_URL =
   "https://www.instagram.com/multi_removal_services/embed";
+// export const COMPANY_GOOGLE_MAP_IFRAME =
+//   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.78174971851!2d147.3670125402465!3d-42.853441905630234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa6e75e3b69e66ef%3A0x9cc4196537ee4dff!2sMulti%20Removal%20%26%20Cleaning%20Services!5e0!3m2!1sen!2snp!4v1711863403041!5m2!1sen!2snp&loading=async";
 export const COMPANY_GOOGLE_MAP_IFRAME =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.78174971851!2d147.3670125402465!3d-42.853441905630234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa6e75e3b69e66ef%3A0x9cc4196537ee4dff!2sMulti%20Removal%20%26%20Cleaning%20Services!5e0!3m2!1sen!2snp!4v1711863403041!5m2!1sen!2snp&loading=async";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3062874.8746756483!2d143.52078531660683!3d-41.43729600044264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474c56ae909d81d%3A0x73ee5419a4b8a8b!2sMulti%20Removal%20and%20Cleaning%20Services!5e0!3m2!1sen!2snp!4v1772290797292!5m2!1sen!2snp";
 export const SITE_URL = IS_DEV ? "/" : NEXT_PUBLIC_SITE_URL!;
 
 export const gallery_images = [
