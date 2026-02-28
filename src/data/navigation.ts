@@ -51,13 +51,13 @@ export const data = [
     title: COMPANY_PHONE_NUMBER,
     url: `tel:${COMPANY_PHONE_NUMBER}`,
     navbar: false,
-    footer_right: true,
+    footer_right: false,
   },
   {
     id: 1.6,
     title: COMPANY_INFO_EMAIL,
     url: `mailto:${COMPANY_INFO_EMAIL}`,
     navbar: false,
-    footer_right: true,
+    footer_right: false,
   },
 ];
