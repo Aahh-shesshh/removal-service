@@ -51,7 +51,7 @@ export async function POST(req: Request) {
 
     <!-- Service Info Section (only if relevant fields exist) -->
     ${
-      data.service_type ||
+      data.service ||
       data.pickup_address ||
       data.drop_address ||
       data.pickup_date
@@ -60,12 +60,12 @@ export async function POST(req: Request) {
       <p style="margin: 0 0 12px; font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px;">Service Details</p>
       <table style="width: 100%; border-collapse: collapse; font-size: 14px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
         ${
-          data.service_type
+          data.type 
             ? `
         <tr>
           <td style="padding: 12px 16px; background: #f8fafc; color: #555; font-weight: 600; width: 38%; border-bottom: 1px solid #e2e8f0;">Service Type</td>
           <td style="padding: 12px 16px; border-bottom: 1px solid #e2e8f0;">
-            <span style="background-color: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">${data.service_type}</span>
+            <span style="background-color: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">${data.service}</span>
           </td>
         </tr>`
             : ""
