@@ -31,7 +31,7 @@ export type TAdditionalInformationFormValues = z.infer<typeof schema>;
 
 export default function AdditionalInformationForm() {
   const [isLoading, setIsLoading] = React.useState(false);
-  const { state } = useBookQuoteCtx();
+  const { state, setState } = useBookQuoteCtx();
 
   const { push } = useRouter();
 
@@ -78,10 +78,11 @@ export default function AdditionalInformationForm() {
     formData,
   ) => {
     setIsLoading(true);
+    setState({ ...state, ...formData });
     try {
       const res = await fetch(pathsWihtoutPrefix.CONTACT_FORM, {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...state, ...formData }),
         headers: { "Content-Type": "application/json" },
       });
 
@@ -101,6 +102,9 @@ export default function AdditionalInformationForm() {
       setIsLoading(false); // always runs
     }
   };
+
+  console.log(state);
+
 
   return (
     <div>
@@ -146,6 +150,7 @@ export default function AdditionalInformationForm() {
             />
           </div>
           {state?.type === "service" && (
+            <>
             <FormInput
               name="floor"
               label="Floor"
@@ -154,18 +159,8 @@ export default function AdditionalInformationForm() {
               placeholder="Eg: 1st floor, 2nd floor, etc."
               register={register("floor")}
               error={errors.phone_number?.message}
-            />
-          )}
-          <FormInput
-            type="textarea"
-            name="message"
-            label="Message"
-            placeholder="Eg. Extra information about the request"
-            error={errors.message?.message}
-            register={register("message")}
-          />
-          {state?.type === "service" && (
-            <SelectInput
+              />
+             <SelectInput
               name="driveway_status"
               placeholder="Select a driveway status..."
               label="Are there stairs or steep driveways at any locations?"
@@ -176,7 +171,18 @@ export default function AdditionalInformationForm() {
               get="name"
               stateChange={(value) => setValue("driveway_status", value)}
             />
+              </>
+
           )}
+          <FormInput
+            type="textarea"
+            name="message"
+            label="Message"
+            placeholder="Eg. Extra information about the request"
+            error={errors.message?.message}
+            register={register("message")}
+          />
+         
         </div>
         <Button
           variant="success"

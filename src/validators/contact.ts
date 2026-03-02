@@ -28,4 +28,6 @@ export const combinedSchema = z.object({
   service_type: z.string().optional(),   // only contact form sends this
   pickup_address: z.string().optional(), // only contact form sends this
   drop_address: z.string().optional(),   // only contact form sends this
+  service: z.string().optional(),        // only contact form sends this
+  type: z.string().optional(),           // only contact form sends this
 });
