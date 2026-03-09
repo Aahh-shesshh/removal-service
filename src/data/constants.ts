@@ -84,4 +84,32 @@ export const gallery_images = [
     src: "/removal-pics/trucks2.jpg",
     alt: "Professional moving truck",
   },
+  {
+    src: "/removal-pics/asset1.jpeg",
+    alt: "Professional moving truck",
+  },
+  {
+    src: "/removal-pics/asset2.jpeg",
+    alt: "Professional moving truck",
+  },
+  {
+    src: "/removal-pics/asset3.jpeg",
+    alt: "Professional moving truck",
+  },
+  {
+    src: "/removal-pics/asset4.jpeg",
+    alt: "Professional moving truck",
+  },
+  {
+    src: "/removal-pics/asset5.jpeg",
+    alt: "Professional moving truck",
+  },
+  {
+    src: "/removal-pics/asset6.jpeg",
+    alt: "Professional moving truck",
+  },
+  {
+    src: "/removal-pics/asset7.jpeg",
+    alt: "Professional moving truck",
+  },
 ];

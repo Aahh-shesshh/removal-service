@@ -41,7 +41,7 @@ export default function ReviewsSection() {
   };
 
   return (
-    <div className="relative pt-16 px-4" id="testimonials">
+    <div className="relative pt-5 px-4" id="testimonials">
       {/* Background decorations */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
