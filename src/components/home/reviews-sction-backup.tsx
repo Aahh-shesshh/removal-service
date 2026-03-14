@@ -1,40 +1,44 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LucideArrowRight,
   LucideQrCode,
   LucideSmartphone,
   LucideStar,
+  LucideChevronLeft,
+  LucideChevronRight,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import TitleContainer from "../title-container";
+import { data } from "@/data/home/section-3";
+import ReviewCard from "./review-card";
 
-export default function ReviewsSection() {
+export default function ReviewsSectionBckp() {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const reviewLink = "https://g.page/r/Cf9N7jdlGcScEBE/review";
   const qrCodeUrl = `/review.png`;
-  const widgetRef = useRef<HTMLDivElement>(null);
 
-  // <script defer async src='https://cdn.trustindex.io/loader.js?aa6276067b19201723866105b56'></script>
+  const reviews = data.reviews;
+  const reviewsPerPage = 2;
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
 
-  useEffect(() => {
-    // Avoid loading the script twice on hot reloads / strict mode double-invoke
-    const existingScript = document.querySelector(
-      'script[src*="trustindex.io/loader.js"]',
-    );
-    if (existingScript) return;
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalPages);
+  };
 
-    const script = document.createElement("script");
-    script.src =
-      "https://cdn.trustindex.io/loader.js?aa6276067b19201723866105b56";
-    script.async = true;
-    script.defer = true;
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
 
-    // Append inside our container — Trustindex will render the widget here
-    if (widgetRef.current) {
-      widgetRef.current.appendChild(script);
-    }
-  }, []);
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const getCurrentReviews = () => {
+    const start = currentIndex * reviewsPerPage;
+    return reviews.slice(start, start + reviewsPerPage);
+  };
 
   return (
     <div className="relative pt-5 px-4" id="testimonials">
@@ -62,10 +66,11 @@ export default function ReviewsSection() {
       />
 
       <div className="max-w-7xl mx-auto">
+        {/* Main content area */}
         <div className="relative z-10 grid gap-8 lg:grid-cols-12 items-start">
-          {/* Left — Title + Trustindex widget */}
+          {/* Left side - Header and Reviews */}
           <div className="lg:col-span-8 space-y-8">
-            {/* Header */}
+            {/* Header Section */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: -30 },
@@ -86,7 +91,7 @@ export default function ReviewsSection() {
               />
 
               {/* Stats bar */}
-              {/* <div className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
+              <div className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
                 <div className="flex items-center space-x-2 md:space-x-3 rounded-full bg-green-50 px-3 md:px-4 py-2 shadow-sm">
                   <div className="flex space-x-0.5 md:space-x-1">
                     {[...Array(5)].map((_, i) => (
@@ -114,24 +119,103 @@ export default function ReviewsSection() {
                     Verified Reviews
                   </span>
                 </div>
-              </div> */}
+              </div>
             </motion.div>
 
-            {/* Trustindex widget — script is appended here via useEffect */}
+            {/* Reviews Carousel */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.6 },
+                },
               }}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
+              className="relative"
             >
-              <div ref={widgetRef} className="min-h-[200px]" />
+              {/* Carousel Container */}
+              <div className="relative overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 ">
+                  <AnimatePresence mode="wait">
+                    {getCurrentReviews().map((review, i) => (
+                      <motion.div
+                        key={`${currentIndex}-${i}`}
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -100 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: i * 0.1,
+                        }}
+                      >
+                        <ReviewCard
+                          date={review.date}
+                          description={review.description}
+                          name={review.name}
+                          title={review.title}
+                        />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Navigation Controls */}
+              <div className="mt-6 flex items-center justify-center gap-4">
+                {/* Previous Button */}
+                <button
+                  onClick={prevSlide}
+                  className="group flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-full bg-white border-2 border-green-200 hover:border-green-400 hover:bg-green-50 transition-all shadow-md hover:shadow-lg"
+                  aria-label="Previous reviews"
+                >
+                  <LucideChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-green-600 group-hover:text-green-700" />
+                </button>
+
+                {/* Dots Indicator */}
+                <div className="flex items-center gap-2">
+                  {[...Array(totalPages)].map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goToSlide(i)}
+                      className={`h-2 rounded-full transition-all ${
+                        i === currentIndex
+                          ? "w-8 bg-green-600"
+                          : "w-2 bg-gray-300 hover:bg-gray-400"
+                      }`}
+                      aria-label={`Go to slide ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Next Button */}
+                <button
+                  onClick={nextSlide}
+                  className="group flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-full bg-white border-2 border-green-200 hover:border-green-400 hover:bg-green-50 transition-all shadow-md hover:shadow-lg"
+                  aria-label="Next reviews"
+                >
+                  <LucideChevronRight className="h-5 w-5 md:h-6 md:w-6 text-green-600 group-hover:text-green-700" />
+                </button>
+              </div>
+
+              {/* Review Counter */}
+              <div className="mt-4 text-center">
+                <span className="text-sm text-gray-600">
+                  Showing {currentIndex * reviewsPerPage + 1}-
+                  {Math.min(
+                    (currentIndex + 1) * reviewsPerPage,
+                    reviews.length,
+                  )}{" "}
+                  of {reviews.length} reviews
+                </span>
+              </div>
             </motion.div>
           </div>
 
-          {/* Right — QR Code sidebar */}
+          {/* QR Code Section - Sticky sidebar */}
           <motion.div
             variants={{
               hidden: { opacity: 0, x: 50, scale: 0.9 },
@@ -153,11 +237,14 @@ export default function ReviewsSection() {
             className="lg:col-span-4"
           >
             <div className="lg:sticky lg:top-24 space-y-6">
+              {/* Main QR Card */}
               <div className="relative overflow-hidden rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 via-white to-blue-50 p-4 md:p-6 shadow-xl">
+                {/* Decorative elements */}
                 <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-green-200/30 blur-2xl" />
                 <div className="absolute -bottom-6 -left-6 h-20 w-20 rounded-full bg-blue-200/30 blur-xl" />
 
                 <div className="relative space-y-4">
+                  {/* Header */}
                   <div className="flex items-center gap-3">
                     <div className="rounded-full bg-green-600 p-2">
                       <LucideQrCode className="h-4 w-4 md:h-5 md:w-5 text-white" />
@@ -172,6 +259,7 @@ export default function ReviewsSection() {
                     </div>
                   </div>
 
+                  {/* QR Code */}
                   <div className="flex justify-center py-3 md:py-4">
                     <div className="rounded-xl border-4 border-white bg-white p-3 md:p-4 shadow-2xl">
                       <Image
@@ -184,6 +272,7 @@ export default function ReviewsSection() {
                     </div>
                   </div>
 
+                  {/* Instructions */}
                   <div className="space-y-3 rounded-xl bg-white/80 p-3 md:p-4 backdrop-blur-sm">
                     <div className="flex items-start gap-3">
                       <div className="rounded-full bg-green-100 p-1.5">
@@ -214,7 +303,7 @@ export default function ReviewsSection() {
                     </div>
                   </div>
 
-                  {/* Mobile CTA */}
+                  {/* CTA Button for mobile */}
                   <a
                     href={reviewLink}
                     target="_blank"

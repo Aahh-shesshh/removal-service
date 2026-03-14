@@ -136,6 +136,11 @@ export default function RootLayout({
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_MAPS_API_KEY}&libraries=places`}
           strategy="beforeInteractive"
         />
+        {/* <Script
+          defer
+          async
+          src="https://cdn.trustindex.io/loader.js?f67ef9857139349b4486deb8a54"
+        /> */}
       </head>
 
       <body className={cn(font.variable, font2.variable, "relative")}>
