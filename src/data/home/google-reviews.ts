@@ -1,4 +1,4 @@
-export const data = {
+export const googleReviews = {
   title: "Check out our verified reviews",
   description:
     "On average, our moving company is rated <span class='font-bold bg-green-500/10 px-2 text-black'>8,6 out of 10</span>. Below are some of our most recent reviews. Get access to our services and experience the same level of satisfaction.",
