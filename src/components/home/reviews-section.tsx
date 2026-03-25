@@ -1,40 +1,126 @@
 "use client";
-import { motion } from "framer-motion";
+import { googleReviews } from "@/data/home/google-reviews";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   LucideArrowRight,
+  LucideChevronLeft,
+  LucideChevronRight,
   LucideQrCode,
   LucideSmartphone,
   LucideStar,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import TitleContainer from "../title-container";
+import { GoogleLogo } from "../ui/googleLogo";
+import { StarRating } from "../ui/star-rating";
+import { ReviewCard, type ReviewItem } from "./review-card";
+
+// ─── Trustindex-style Google Reviews Widget ───────────────────────────────────
+
+function TrustindexWidget({ reviews }: { reviews: ReviewItem[] }) {
+  const perPage = 3;
+  const totalPages = Math.ceil(reviews.length / perPage);
+  const [page, setPage] = useState(0);
+
+  const currentReviews = reviews.slice(
+    page * perPage,
+    page * perPage + perPage,
+  );
+
+  return (
+    <div className="space-y-4">
+      {/* Header bar */}
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-100 bg-white px-5 py-4 shadow-sm">
+        {/* Google branding + rating */}
+        <div className="flex items-center gap-3">
+          <GoogleLogo size={24} />
+          <div>
+            <p className="text-xs font-medium text-gray-500">Google Reviews</p>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-3xl font-semibold text-gray-900">5.0</span>
+              <StarRating count={5} size={15} />
+            </div>
+            <p className="text-xs text-gray-400">50+ reviews</p>
+          </div>
+          <div className="h-10 w-px bg-gray-100" />
+        </div>
+
+        {/* Badges */}
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
+            ✓ Verified Reviews
+          </span>
+          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            ★ Top Rated Business
+          </span>
+        </div>
+      </div>
+
+      {/* Review cards */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <AnimatePresence mode="wait">
+          {currentReviews.map((review, i) => (
+            <motion.div
+              key={`${page}-${i}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3, delay: i * 0.07 }}
+            >
+              <ReviewCard
+                review={review}
+                index={i}
+                pageStart={page * perPage}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-3">
+        <button
+          onClick={() => setPage((p) => (p - 1 + totalPages) % totalPages)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:bg-gray-50"
+          aria-label="Previous"
+        >
+          <LucideChevronLeft className="h-4 w-4" />
+        </button>
+
+        <div className="flex items-center gap-1.5">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setPage(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                i === page
+                  ? "w-6 bg-blue-500"
+                  : "w-1.5 bg-gray-300 hover:bg-gray-400"
+              }`}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={() => setPage((p) => (p + 1) % totalPages)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:bg-gray-50"
+          aria-label="Next"
+        >
+          <LucideChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Section ─────────────────────────────────────────────────────────────
 
 export default function ReviewsSection() {
   const reviewLink = "https://g.page/r/Cf9N7jdlGcScEBE/review";
   const qrCodeUrl = `/review.png`;
-  const widgetRef = useRef<HTMLDivElement>(null);
-
-  // <script defer async src='https://cdn.trustindex.io/loader.js?aa6276067b19201723866105b56'></script>
-
-  useEffect(() => {
-    // Avoid loading the script twice on hot reloads / strict mode double-invoke
-    const existingScript = document.querySelector(
-      'script[src*="trustindex.io/loader.js"]',
-    );
-    if (existingScript) return;
-
-    const script = document.createElement("script");
-    script.src =
-      "https://cdn.trustindex.io/loader.js?aa6276067b19201723866105b56";
-    script.async = true;
-    script.defer = true;
-
-    // Append inside our container — Trustindex will render the widget here
-    if (widgetRef.current) {
-      widgetRef.current.appendChild(script);
-    }
-  }, []);
+  const reviews: ReviewItem[] = googleReviews.reviews;
 
   return (
     <div className="relative pt-5 px-4" id="testimonials">
@@ -53,17 +139,10 @@ export default function ReviewsSection() {
         transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
         className="absolute right-10 top-1/3 h-20 w-20 rounded-full bg-blue-100/20 blur-2xl"
       />
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
-        className="absolute -bottom-16 left-1/3 h-24 w-24 rounded-full bg-yellow-100/20 blur-3xl"
-      />
 
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 grid gap-8 lg:grid-cols-12 items-start">
-          {/* Left — Title + Trustindex widget */}
+          {/* Left side */}
           <div className="lg:col-span-8 space-y-8">
             {/* Header */}
             <motion.div
@@ -84,40 +163,9 @@ export default function ReviewsSection() {
                 title="What Our Customers Say"
                 description="Read authentic reviews from our valued customers on Google"
               />
-
-              {/* Stats bar */}
-              {/* <div className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
-                <div className="flex items-center space-x-2 md:space-x-3 rounded-full bg-green-50 px-3 md:px-4 py-2 shadow-sm">
-                  <div className="flex space-x-0.5 md:space-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <LucideStar
-                        key={i}
-                        className="h-2.5 w-2.5 md:h-3 md:w-3 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-xs md:text-sm font-semibold text-green-700">
-                    5.0 Rating
-                  </span>
-                </div>
-
-                <div className="flex items-center space-x-2 rounded-full bg-blue-50 px-3 md:px-4 py-2 shadow-sm">
-                  <div className="h-2 w-2 rounded-full bg-blue-500" />
-                  <span className="text-xs md:text-sm font-semibold text-blue-700">
-                    100+ Happy Customers
-                  </span>
-                </div>
-
-                <div className="flex items-center space-x-2 rounded-full bg-yellow-50 px-3 md:px-4 py-2 shadow-sm">
-                  <div className="h-2 w-2 rounded-full bg-yellow-500" />
-                  <span className="text-xs md:text-sm font-semibold text-yellow-700">
-                    Verified Reviews
-                  </span>
-                </div>
-              </div> */}
             </motion.div>
 
-            {/* Trustindex widget — script is appended here via useEffect */}
+            {/* Trustindex Widget */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -127,11 +175,11 @@ export default function ReviewsSection() {
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <div ref={widgetRef} className="min-h-[200px]" />
+              <TrustindexWidget reviews={reviews} />
             </motion.div>
           </div>
 
-          {/* Right — QR Code sidebar */}
+          {/* QR Code sidebar */}
           <motion.div
             variants={{
               hidden: { opacity: 0, x: 50, scale: 0.9 },
@@ -214,7 +262,6 @@ export default function ReviewsSection() {
                     </div>
                   </div>
 
-                  {/* Mobile CTA */}
                   <a
                     href={reviewLink}
                     target="_blank"
@@ -225,7 +272,6 @@ export default function ReviewsSection() {
                     <LucideArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </a>
 
-                  {/* Desktop link */}
                   <a
                     href={reviewLink}
                     target="_blank"
