@@ -164,36 +164,29 @@ export default function AboutUs() {
 
             {/* Location Section */}
             <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-lg border border-gray-100">
-              <div className="text-center space-y-6">
-                <div className="flex items-center justify-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-blue-100 to-green-100 rounded-2xl">
-                    <MapPin className="w-6 h-6 text-blue-600" />
+              <div className="flex flex-col items-center gap-6 text-center">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-50 rounded-xl">
+                    <MapPin className="w-5 h-5 text-blue-600" />
                   </div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                    Serving All of Australia
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    Our service area
                   </h2>
                 </div>
-                <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                  From bustling Sydney to beautiful Perth, we provide
-                  comprehensive removal services across all major Australian
-                  cities and regional areas.
+
+                <p className="text-lg text-gray-600 leading-relaxed max-w-md">
+                  We proudly operate in Hobart and across Tasmania, delivering
+                  reliable and professional removal services right to your door.
                 </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                  {["Sydney", "Melbourne", "Brisbane", "Perth"].map(
-                    (city, i) => (
-                      <div
-                        key={i}
-                        className="p-4 bg-gradient-to-br from-blue-50 to-green-50 rounded-xl border border-blue-100"
-                      >
-                        <div className="font-semibold text-gray-900">
-                          {city}
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Full Service Available
-                        </div>
-                      </div>
-                    )
-                  )}
+
+                <div className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-full px-5 py-3">
+                  <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                  <span className="font-semibold text-gray-900">
+                    Hobart, Tasmania
+                  </span>
+                  <span className="text-sm text-green-700 bg-green-100 px-3 py-0.5 rounded-full">
+                    Full service available
+                  </span>
                 </div>
               </div>
             </div>
