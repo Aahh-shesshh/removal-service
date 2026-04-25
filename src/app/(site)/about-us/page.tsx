@@ -162,41 +162,7 @@ export default function AboutUs() {
               </div>
             ))}
 
-            {/* Location Section */}
-            <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-lg border border-gray-100">
-              <div className="text-center space-y-6">
-                <div className="flex items-center justify-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-blue-100 to-green-100 rounded-2xl">
-                    <MapPin className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                    Serving All of Australia
-                  </h2>
-                </div>
-                <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                  From bustling Sydney to beautiful Perth, we provide
-                  comprehensive removal services across all major Australian
-                  cities and regional areas.
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                  {["Sydney", "Melbourne", "Brisbane", "Perth"].map(
-                    (city, i) => (
-                      <div
-                        key={i}
-                        className="p-4 bg-gradient-to-br from-blue-50 to-green-50 rounded-xl border border-blue-100"
-                      >
-                        <div className="font-semibold text-gray-900">
-                          {city}
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Full Service Available
-                        </div>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
+            
           </div>
 
           {/* Sidebar */}
