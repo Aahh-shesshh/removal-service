@@ -162,7 +162,34 @@ export default function AboutUs() {
               </div>
             ))}
 
-            
+            {/* Location Section */}
+            <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-lg border border-gray-100">
+              <div className="flex flex-col items-center gap-6 text-center">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-50 rounded-xl">
+                    <MapPin className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    Our service area
+                  </h2>
+                </div>
+
+                <p className="text-lg text-gray-600 leading-relaxed max-w-md">
+                  We proudly operate in Hobart and across Tasmania, delivering
+                  reliable and professional removal services right to your door.
+                </p>
+
+                <div className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-full px-5 py-3">
+                  <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                  <span className="font-semibold text-gray-900">
+                    Hobart, Tasmania
+                  </span>
+                  <span className="text-sm text-green-700 bg-green-100 px-3 py-0.5 rounded-full">
+                    Full service available
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Sidebar */}
