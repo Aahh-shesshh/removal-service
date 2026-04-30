@@ -57,22 +57,7 @@ export default function AdditionalInformationForm() {
     [state],
   );
 
-  // const onSubmit: SubmitHandler<TAdditionalInformationFormValues> = async (
-  //   d,
-  // ) => {
-  //   setIsLoading(true);
-  //   setState({ ...state, ...d });
-  //   await f({
-  //     url: pathsWihtoutPrefix.QUOTE_FORM,
-  //     method: 'POST',
-  //     body: { ...state, ...d },
-  //     success:
-  //       'Your message has been sent successfully! We will get back to you soon.',
-  //     error: 'Something went wrong!',
-  //   });
-  //   push('/');
-  //   setIsLoading(false);
-  // };
+  
 
   const onSubmit: SubmitHandler<TAdditionalInformationFormValues> = async (
     formData,
