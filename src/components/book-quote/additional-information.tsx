@@ -8,7 +8,6 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { useBookQuoteCtx } from "@/context/book-quote";
-// import { f } from '@/lib/fetch';
 import { pathsWihtoutPrefix } from "@/services";
 
 import toast from "react-hot-toast";
@@ -16,19 +15,11 @@ import { Button } from "../ui/button";
 import { DateInput } from "../ui/date-input";
 import { FormInput } from "../ui/form-input";
 import { SelectInput } from "../ui/select-input";
+import { quoteSchema } from "@/validators/contact";
 
-const schema = z.object({
-  full_name: z.string().min(1),
-  email: z.string().email(),
-  phone_number: z.string().optional(),
-  pickup_date: z.string().optional(),
-  message: z.string().max(500).min(1),
-  floor: z.string().optional(),
-  driveway_status: z.string().optional(),
-});
+// 
 
-export type TAdditionalInformationFormValues = z.infer<typeof schema>;
-
+export type TAdditionalInformationFormValues = z.infer<typeof quoteSchema>;
 export default function AdditionalInformationForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const { state, setState } = useBookQuoteCtx();
@@ -42,7 +33,7 @@ export default function AdditionalInformationForm() {
     setValue,
     reset,
   } = useForm<TAdditionalInformationFormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(quoteSchema),
   });
 
   const isDisabled = useMemo(
@@ -57,15 +48,13 @@ export default function AdditionalInformationForm() {
     [state],
   );
 
-  
-
   const onSubmit: SubmitHandler<TAdditionalInformationFormValues> = async (
     formData,
   ) => {
     setIsLoading(true);
     setState({ ...state, ...formData });
     try {
-      const res = await fetch(pathsWihtoutPrefix.CONTACT_FORM, {
+      const res = await fetch(pathsWihtoutPrefix.QUOTE_FORM, {
         method: "POST",
         body: JSON.stringify({ ...state, ...formData }),
         headers: { "Content-Type": "application/json" },
@@ -87,9 +76,6 @@ export default function AdditionalInformationForm() {
       setIsLoading(false); // always runs
     }
   };
-
-  console.log(state);
-
 
   return (
     <div>
@@ -136,28 +122,27 @@ export default function AdditionalInformationForm() {
           </div>
           {state?.type === "service" && (
             <>
-            <FormInput
-              name="floor"
-              label="Floor"
-              type="text"
-              className="w-full"
-              placeholder="Eg: 1st floor, 2nd floor, etc."
-              register={register("floor")}
-              error={errors.phone_number?.message}
+              <FormInput
+                name="floor"
+                label="Floor"
+                type="text"
+                className="w-full"
+                placeholder="Eg: 1st floor, 2nd floor, etc."
+                register={register("floor")}
+                error={errors.phone_number?.message}
               />
-             <SelectInput
-              name="driveway_status"
-              placeholder="Select a driveway status..."
-              label="Are there stairs or steep driveways at any locations?"
-              data={[
-                { id: "yes", name: "Yes" },
-                { id: "no", name: "No" },
-              ]}
-              get="name"
-              stateChange={(value) => setValue("driveway_status", value)}
-            />
-              </>
-
+              <SelectInput
+                name="driveway_status"
+                placeholder="Select a driveway status..."
+                label="Are there stairs or steep driveways at any locations?"
+                data={[
+                  { id: "yes", name: "Yes" },
+                  { id: "no", name: "No" },
+                ]}
+                get="name"
+                stateChange={(value) => setValue("driveway_status", value)}
+              />
+            </>
           )}
           <FormInput
             type="textarea"
@@ -167,7 +152,6 @@ export default function AdditionalInformationForm() {
             error={errors.message?.message}
             register={register("message")}
           />
-         
         </div>
         <Button
           variant="success"

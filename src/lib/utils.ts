@@ -18,6 +18,13 @@ export function objectToURLSearchParams(obj: Record<string, any>) {
   return params.toString();
 }
 
+// Add this helper at the top of quote-route.ts
+export const formatService = (service: string) =>
+  service
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
 export const parseBackendValidation = async <T extends FieldValues, E>(
   res: T,
   setErrors: UseFormSetError<T>,

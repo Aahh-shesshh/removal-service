@@ -312,7 +312,7 @@ export default function Service({ params: { slug } }: P) {
           </div>
 
           {/* Contact Form stays as is */}
-          <ContactForm selected_service={service.id} />
+          <ContactForm  />
         </div>
 
         {/* These components stay as is - you'll update them separately */}
