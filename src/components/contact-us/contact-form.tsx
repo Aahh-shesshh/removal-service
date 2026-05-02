@@ -1,46 +1,32 @@
 "use client";
+import { pathsWihtoutPrefix } from "@/services";
+import {  contactSchema } from "@/validators/contact";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LucideArrowRightCircle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import type { z } from "zod";
-import { data } from "@/data/services";
-import { pathsWihtoutPrefix } from "@/services";
-import { schema } from "@/validators/contact";
 import toast from "react-hot-toast";
+import type { z } from "zod";
 import { Button } from "../ui/button";
-import { DateInput } from "../ui/date-input";
 import { FormInput } from "../ui/form-input";
-import { SelectInput } from "../ui/select-input";
 
-export type TInquiryFormValues = z.infer<typeof schema>;
+export type TInquiryFormValues = z.infer<typeof contactSchema>;
 
-type TProps = {
-  selected_service?: number;
-};
 
-export default function ContactForm({ selected_service }: TProps) {
+
+export default function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const selectedService = data.list?.find(
-    (item) => item.id === selected_service,
-  );
-  const getServiceTitle = (id?: number) =>
-    data.list?.find((s) => s.id === id)?.title ?? "Local Removals in Hobart";
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
     reset,
   } = useForm<TInquiryFormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(contactSchema),
     mode: "onSubmit",
-    defaultValues: {
-      service_type: getServiceTitle(selected_service),
-    },
   });
-
 
   const onSubmit: SubmitHandler<TInquiryFormValues> = async (formData) => {
     setIsLoading(true);
@@ -64,10 +50,6 @@ export default function ContactForm({ selected_service }: TProps) {
       setIsLoading(false); // always runs
     }
   };
-  useEffect(() => {
-    if (selected_service)
-      setValue("service_type", getServiceTitle(selected_service));
-  }, [selected_service, setValue]);
 
   return (
     <form
@@ -122,81 +104,7 @@ export default function ContactForm({ selected_service }: TProps) {
         />
       </div>
 
-      {selectedService?.type === "service" && (
-        <div className="space-y-4 p-4 bg-green-50/50 rounded-lg border border-green-100">
-          <h4 className="font-semibold text-gray-900 text-sm">
-            Service Details
-          </h4>
 
-          <FormInput
-            name="pickup_address"
-            label="Pickup Address"
-            type="text"
-            className="w-full border-gray-200 focus:border-green-500 focus:ring-green-500/20 rounded-lg"
-            placeholder="Eg: 123, Some street, Some city, Some country - 123456"
-            register={register("pickup_address")}
-            error={errors.pickup_address?.message}
-          />
-
-          <FormInput
-            name="drop_address"
-            label="Drop Address"
-            type="text"
-            className="w-full border-gray-200 focus:border-green-500 focus:ring-green-500/20 rounded-lg"
-            placeholder="Eg: 123, Some street, Some city, Some country - 123456"
-            register={register("drop_address")}
-            error={errors.drop_address?.message}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormInput
-              name="floor"
-              label="Floor"
-              type="text"
-              className="w-full border-gray-200 focus:border-green-500 focus:ring-green-500/20 rounded-lg"
-              placeholder="Eg: 1st floor, 2nd floor, etc."
-              register={register("floor")}
-              error={errors.floor?.message}
-            />
-
-            <div className="w-full">
-              <DateInput
-                name="pickup_date"
-                label="Pickup Date"
-                onChange={(date) => setValue("pickup_date", date)}
-              />
-            </div>
-          </div>
-
-          <SelectInput
-            disabled={!!selected_service}
-            name="service_type"
-            placeholder="Select a service type..."
-            label="Service"
-            data={
-              data.list?.map((service) => ({
-                id: service.id.toString(),
-                name: service.title,
-                def: service.id === selected_service,
-              })) || []
-            }
-            get="name"
-            stateChange={(value) => setValue("service_type", value)}
-          />
-
-          <SelectInput
-            name="driveway_status"
-            placeholder="Select a driveway status..."
-            label="Are there stairs or steep driveways at any locations?"
-            data={[
-              { id: "yes", name: "Yes" },
-              { id: "no", name: "No" },
-            ]}
-            get="name"
-            stateChange={(value) => setValue("driveway_status", value)}
-          />
-        </div>
-      )}
 
       <FormInput
         name="message"

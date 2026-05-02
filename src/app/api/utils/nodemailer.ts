@@ -5,14 +5,14 @@ const transporter: Transporter = nodemailer.createTransport({
   port: 465,
   host: "smtp.gmail.com",
   auth: {
-    user: process.env.EMAIL_USER as string,
-    pass: process.env.EMAIL_PASSWORD as string,
+    user: process.env.EMAIL as string,
+    pass: process.env.EMAIL_PASS as string,
   },
 });
 
 export const mailOptions: SendMailOptions = {
-  from: process.env.EMAIL_USER as string,
-  to: process.env.EMAIL_USER as string,
+  from: process.env.EMAIL as string,
+  to: process.env.EMAIL as string,
 };
 
 export default transporter;
