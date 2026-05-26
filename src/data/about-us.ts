@@ -3,7 +3,12 @@ import type { TAboutUsData } from "@/types";
 export const data: TAboutUsData = {
   title: "About Multi Removal and Cleaning Experts Hobart",
   description:
-    "Multi Removal and Cleaning Experts Hobart is the leading provider of comprehensive removal and cleaning services in Hobart, Tasmania. With years of experience and a team of highly skilled professionals, we have built a reputation for excellence in the industry. Removal in hobart mover in hobart cheap removal best removal in hobart Two man and van Affordeable removal Hobart House office relocation Hobart tas Removal service Hobart tas",
+  "Multi Removal and Cleaning Experts is Hobart's most trusted removalist and cleaning service. " +
+  "We specialise in house removals, office relocations, and end-of-lease cleaning across Hobart and Tasmania. " +
+  "Our affordable two-man and van service, professional packers, and fully insured movers make your move stress-free. " +
+  "Whether you need a cheap removalist in Hobart, a local mover in Tasmania, or a complete removal and cleaning package, " +
+  "we deliver reliable, fast, and affordable service every time. " +
+  "Serving Hobart TAS and surrounding areas — get your free quote today.",
   paragraphs: [
     {
       title: "Removal Services in Hobart",
