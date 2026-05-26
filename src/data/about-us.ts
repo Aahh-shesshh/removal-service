@@ -3,7 +3,7 @@ import type { TAboutUsData } from "@/types";
 export const data: TAboutUsData = {
   title: "About Multi Removal and Cleaning Experts Hobart",
   description:
-  "Multi Removal and Cleaning Experts is Hobart's most trusted removalist and cleaning service. " +
+  "Multi Removal and Cleaning Experts is Hobart's most trusted removalists and cleaning service. " +
   "We specialise in house removals, office relocations, and end-of-lease cleaning across Hobart and Tasmania. " +
   "Our affordable two-man and van service, professional packers, and fully insured movers make your move stress-free. " +
   "Whether you need a cheap removalist in Hobart, a local mover in Tasmania, or a complete removal and cleaning package, " +
