@@ -19,80 +19,83 @@ import RelatedServices from "@/components/service/related-services";
 import {
   COMPANY_NAME,
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  NEXT_PUBLIC_SITE_URL,
   SITE_URL,
 } from "@/data/constants";
 import { data } from "@/data/services";
 import { generateKeywords } from "@/lib/utils";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 
-// Keep your existing generateMetadata function as is
+type P = { params: Promise<{ slug: string }> };
+
 export async function generateMetadata(
-  { params: { slug } }: P,
+  { params }: P,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const { slug } = await params;
+  const { abstract, description, openGraph, twitter } = await parent;
+
   const service = data.list?.find((item) => item.slug === slug);
 
-  const {
-    abstract,
-    description,
-    openGraph,
-    title,
-    twitter,
-    other,
-    "apple-touch-icon-precomposed": a,
-    "apple-touch-fullscreen": b,
-    viewport: c,
-    themeColor,
-    colorScheme,
-    ...rest
-  } = await parent;
+  const serviceTitle = service?.title ?? "Our Services";
+  const serviceDesc =
+    service?.overview ?? service?.description ?? description ?? "";
 
   return {
-    ...rest,
     appleWebApp: undefined,
-    other: other || {},
     alternates: {
       canonical: `${SITE_URL}/service/${slug}`,
     },
-    title: service?.title || title,
+    icons: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/logo/logo-png.png",
+      },
+    ],
+    title: {
+      default: `${serviceTitle} | ${COMPANY_NAME}`,
+      template: `%s | ${COMPANY_NAME}`,
+    },
     publisher: "Aarambha IT Research Center",
-    keywords: generateKeywords(service?.overview || service?.description || ""),
-    abstract: service?.overview || abstract,
+    keywords: generateKeywords(serviceDesc),
+    abstract: service?.overview ?? abstract,
     authors: [
       {
-        name: "Aakash Acharya",
-        url: "https://aakashacharya.com.np/",
+        name: "Ashish Khatri",
+        url: "https://ashishkhatri.vercel.app/",
       },
     ],
     category: "Service",
     classification: "Removal Service",
-    creator: "Aakash Acharya",
+    creator: "Ashish Khatri",
     generator: "Next.js",
     robots: "index, follow",
     verification: {
       google: NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
-    description: service?.overview || service?.description || description,
+    description: serviceDesc,
     twitter: {
       card: "summary_large_image",
-      title: `${service?.title} - ${COMPANY_NAME}`,
-      description:
-        service?.overview || service?.description || description || "",
-      images: service?.images || twitter?.images,
+      title: `${serviceTitle} | ${COMPANY_NAME}`,
+      description: serviceDesc,
+      images: service?.images ?? twitter?.images,
     },
     openGraph: {
-      title: `${service?.title} - ${COMPANY_NAME}`,
-      description:
-        service?.overview || service?.description || description || "",
-      images: service?.images || openGraph?.images,
-      type: "article",
+      title: `${serviceTitle} | ${COMPANY_NAME}`,
+      description: serviceDesc,
+      images: service?.images ?? openGraph?.images,
       url: `${SITE_URL}/service/${slug}`,
+      type: "website",
     },
     applicationName: COMPANY_NAME,
+    metadataBase: new URL(NEXT_PUBLIC_SITE_URL!),
   };
 }
 
-export default function Service({ params: { slug } }: P) {
+export default async function Service({ params }: P) {
+  const { slug } = await params;
   const service = data.list?.find((item) => item.slug === slug);
 
   if (!service) return notFound();

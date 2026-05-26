@@ -13,6 +13,74 @@ import { data } from "@/data/about-us";
 import Facebook from "@/components/facebook";
 import Instagram from "@/components/instagram";
 import ReceiveQuotesForYourMove from "@/components/service/receive-quotes-for-your-move";
+import type { Metadata, ResolvingMetadata } from "next";
+import {
+  COMPANY_NAME,
+  NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  NEXT_PUBLIC_SITE_URL,
+  SITE_URL,
+} from "@/data/constants";
+import { generateKeywords } from "@/lib/utils";
+
+export async function generateMetadata(
+  _: P,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { abstract, description, openGraph, twitter } = await parent;
+
+  return {
+    appleWebApp: undefined,
+    alternates: {
+      canonical: SITE_URL,
+    },
+    icons: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/logo/logo-png.png",
+      },
+    ],
+    // UPDATED: More SEO-friendly title
+    title: {
+      default: `About Us | ${COMPANY_NAME}`,
+      template: `%s | ${COMPANY_NAME}`,
+    },
+    publisher: "Aarambha IT Research Center",
+    keywords: generateKeywords(data?.description || ""),
+    abstract: data.description || abstract,
+    authors: [
+      {
+        name: "Ashish Khatri",
+        url: "https://ashishkhatri.vercel.app/",
+      },
+    ],
+    category: "Service",
+    classification: "Removal Service",
+    creator: "Ashish Khatri",
+    generator: "Next.js",
+    robots: "index, follow",
+    verification: {
+      google: NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    },
+    description: data?.description || description,
+    twitter: {
+      card: "summary_large_image",
+      title: COMPANY_NAME,
+      description: data.description || description || "",
+      images: twitter?.images,
+    },
+    openGraph: {
+      title: COMPANY_NAME,
+      description: data?.description || description || "",
+      images: openGraph?.images,
+      type: "article",
+    },
+    applicationName: COMPANY_NAME,
+    metadataBase: new URL(NEXT_PUBLIC_SITE_URL!),
+  };
+}
+
 
 export default function AboutUs() {
   const stats = [

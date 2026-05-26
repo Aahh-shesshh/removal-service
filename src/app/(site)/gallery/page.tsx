@@ -3,6 +3,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { gallery_images } from "@/data/constants";
 
+
+
 const GalleryPage = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
