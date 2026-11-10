@@ -75,3 +75,10 @@ export type TMailData<T> = {
 
   context: T;
 };
+
+import type { data } from "@/data/services";
+
+export type Service = NonNullable<(typeof data)["list"]>[number];
+export type ServiceSection = NonNullable<
+  NonNullable<Service["page_data"]>["sections"]
+>[number];
