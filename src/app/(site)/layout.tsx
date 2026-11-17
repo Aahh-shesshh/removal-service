@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import Footer from '@/components/layout/footer';
+import Footer from "@/components/layout/footer";
+import Snowfall from "@/components/layout/snow-fall";
 
 export default function SiteLayout({
   children,
@@ -9,6 +10,7 @@ export default function SiteLayout({
 }>) {
   return (
     <div>
+      <Snowfall />
       {children}
       <Footer />
     </div>

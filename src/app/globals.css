@@ -143,3 +143,20 @@
     column-count: 4;
   }
 }
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snowfall {
+  to {
+    transform: translate3d(var(--drift), 105vh, 0);
+  }
+}
