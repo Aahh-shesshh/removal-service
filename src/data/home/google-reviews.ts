@@ -4,68 +4,68 @@ export const googleReviews = {
     "On average, our moving company is rated <span class='font-bold bg-green-500/10 px-2 text-black'>8,6 out of 10</span>. Below are some of our most recent reviews. Get access to our services and experience the same level of satisfaction.",
   reviews: [
     {
+      id: 9,
+      title: "Excellent Removal Service",
+      description:
+        "Great service - punctual, tidy and careful. Two loads transported, and nothing broken or damaged. And a great price! Very happy to recommend.",
+      name: "Ailsa McLaren",
+      date: "2 months ago",
+    },
+    {
+      id: 10,
+      title: "Efficient Moving Service",
+      description:
+        "Mahesh and his offsider moved my friend just recently. It was a big task but they were efficient, punctual and got it all done with nothing broken or damaged. I'd recommend to anyone. Cheers fellas.",
+      name: "Ayla Williams",
+      date: "1 month ago",
+    },
+    {
       id: 1,
       title: "Excellent Cleaning Service",
       description:
-        "Really great movers, very helpful and polite. Also very professional and got straight on the task! Highly recommend!",
-      name: "Laura B",
-      date: "2025.07.03",
+        "Multiservices were awesome. Extremely accomodating even though there were multiple delays. The house clean and carpet steam was so fantastic that I asked them to bond clean my rental too. They are also very efficient and professional Removalists. Communication was top knotch. I will definitely use their services again. Thank you Mahesh and team!",
+      name: "Ren",
+      date: "2 months ago",
     },
     {
       id: 2,
-      title: "Smooth Office Relocation",
+      title: "Efficient Moving Service",
       description:
-        "Many thanks to Mahesh and his team for moving our home contents to our new property. Multi removalists are friendly, careful and methodical. The took great care of all our belongings with not a single item damaged. Furniture items were wrapped carefully and nothing was too much trouble. Moving can be stressful but these cheerful guys made it easy and at a very affordable price. Thanks Mahesh.",
-      name: "Lynne Crichton-GIll",
-      date: "2025.05.20",
+        "We had multi removal to help us move. Would definitely recommend these guys. Very quick and efficient. Don't hesitate to call them.  10/10.",
+      name: "Denise Direen",
+      date: "6 months ago",
     },
     {
       id: 3,
-      title: "Impressive Move In/Out Cleaning",
+      title: "Amazing Cleaning Service",
       description:
-        " Mahesh and his amazing team have been fabulous! They recently completed our residential move on the Tasman Peninsula, which went incredibly smoothly at a reasonable price. They then swept in, leaving our previous rental property spotless, easy securing our bond. I don't think the oven or carpets have been so clean since new! Thank you, Mahesh. You should be incredibly proud of your team. I would easily recommend your services.",
-      name: "Peta Armstrong",
-      date: "2025.05.13",
+        "The cleaning and removal service both were amazing. Timely done, effective work and precise movement.",
+      name: "Abhisekh Paudel",
+      date: "3 months ago",
     },
     {
       id: 4,
-      title: "Reliable Parcel Delivery",
+      title: "Great Moving Service",
       description:
-        "Moving is always stressful but the young men from Multi Removal etc with their superb efficiency, carefulness, friendly and confident manner took away most of the worry. They were great, affordable and I happily recommend these excellent professional people. I and my family will ask for their services again when needed. Thankyou so much you guys 👌🌹⭐⭐⭐⭐⭐",
-      name: "Samantha McDonald",
-      date: "2025.05.13",
+        "Really great! Punctual, careful with my things, friendly, and efficient. Scheduling was very easy, too! Will definitely use for all my Marketplace moves in future",
+      name: "Bones Hillier",
+      date: "3 months ago",
     },
     {
       id: 5,
-      title: "Outstanding Builders Cleaning",
+      title: "Great Moving Service",
       description:
-        "So professional!! Nothing was too difficult. We had an 8 seater concrete dining table and a steep driveway and we were sweating bullets about getting it moved. These guys did it all with a smile. Three truck loads, packed like Tetris, and not a scratch on anything, or the floors. Highly, highly recommend!! Great price too.",
-      name: "Sarah Troman",
-      date: "2025.04.14",
+      "Mahesh and team were super- efficient, accommodating and went beyond what we agreed upon. Highly recommended, will hire them again if needed. I have tried couple of removalists until now and believe me they have been the best. Jobs completed- end of lease cleaning, packing and moving. They even dismantled and set up a Vuly trampoline.",
+      name: "Tarun",
+      date: "3 months ago",
     },
     {
       id: 6,
-      title: "Efficient Furniture Removal",
+      title: "Great Moving Service",
       description:
-        "I used Multi Removal and Cleaning Services for my recent move and end of lease clean. They were very quick, professional and helpful. I highly recommended the team from Multi Removals and would definitely use them again.",
-      name: "Katie",
-      date: "2025.04.02",
-    },
-    {
-      id: 7,
-      title: "Efficient Furniture Removal",
-      description:
-        "Responded to my call to arrange removal of furniture and completed job of delivery in a timely manner. Thank you.",
-      name: "Shirin Fernandez",
-      date: "2025.03.31",
-    },
-    {
-      id: 7,
-      title: "Samrat Rayamajhi",
-      description:
-        "These guys are Gem. They are really quick and how effortlessly they moved my two full truck stuff to two storey house. They are reliable and punctual and really appreciate the output they all have kept. I would say the price they charged was way reasonable and I would definitely call them next time as well. Thank you Multi team.",
-      name: "Shirin Fernandez",
-      date: "2025.03.14",
+      "Thank you Mahesh and the team at Multi Removal & Cleaning Services. Messaged the team at 9am and both lounges were removed by 11am on a Saturday. 🙏",
+      name: "Ian Chan",
+      date: "2 months ago",
     },
   ],
 };

@@ -2,14 +2,14 @@ import React from "react";
 import {
   CheckCircle,
   Users,
-  Clock,
   Shield,
-  Award,
+  Star,
   TrendingUp,
   Heart,
   MapPin,
 } from "lucide-react";
 import { data } from "@/data/about-us";
+import { BUSINESS } from "@/data/business-info";
 import Facebook from "@/components/facebook";
 import Instagram from "@/components/instagram";
 import ReceiveQuotesForYourMove from "@/components/service/receive-quotes-for-your-move";
@@ -27,11 +27,13 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { abstract, description, openGraph, twitter } = await parent;
+  const pageTitle = `About Us | ${COMPANY_NAME}`;
+  const pageDescription = data?.description || description || "";
 
   return {
     appleWebApp: undefined,
     alternates: {
-      canonical: SITE_URL,
+      canonical: `${SITE_URL}/about-us`, // was pointing at the homepage
     },
     icons: [
       {
@@ -41,9 +43,8 @@ export async function generateMetadata(
         url: "/logo/logo-png.png",
       },
     ],
-    // UPDATED: More SEO-friendly title
     title: {
-      default: `About Us | ${COMPANY_NAME}`,
+      default: pageTitle,
       template: `%s | ${COMPANY_NAME}`,
     },
     publisher: "Aarambha IT Research Center",
@@ -63,16 +64,16 @@ export async function generateMetadata(
     verification: {
       google: NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
-    description: data?.description || description,
+    description: pageDescription,
     twitter: {
       card: "summary_large_image",
-      title: COMPANY_NAME,
-      description: data.description || description || "",
+      title: pageTitle,
+      description: pageDescription,
       images: twitter?.images,
     },
     openGraph: {
-      title: COMPANY_NAME,
-      description: data?.description || description || "",
+      title: pageTitle,
+      description: pageDescription,
       images: openGraph?.images,
       type: "article",
     },
@@ -81,35 +82,38 @@ export async function generateMetadata(
   };
 }
 
+const stats = [
+  {
+    icon: Star,
+    value: `${BUSINESS.google.rating}★`,
+    label: "Google Rating",
+    color: "text-yellow-600",
+    bg: "bg-yellow-50",
+  },
+  {
+    icon: Users,
+    value: BUSINESS.google.reviewCount,
+    label: "Local Google Reviews",
+    color: "text-blue-600",
+    bg: "bg-blue-50",
+  },
+  {
+    icon: Shield,
+    value: "100%",
+    label: BUSINESS.guarantee.name,
+    color: "text-purple-600",
+    bg: "bg-purple-50",
+  },
+  {
+    icon: MapPin,
+    value: BUSINESS.location.suburb,
+    label: "Locally Owned & Operated",
+    color: "text-green-600",
+    bg: "bg-green-50",
+  },
+];
 
 export default function AboutUs() {
-  const stats = [
-    {
-      icon: Users,
-      value: "50K+",
-      label: "Happy Customers",
-      color: "text-blue-600",
-    },
-    {
-      icon: Clock,
-      value: "15+",
-      label: "Years Experience",
-      color: "text-green-600",
-    },
-    {
-      icon: Shield,
-      value: "100%",
-      label: "Insured Moves",
-      color: "text-purple-600",
-    },
-    {
-      icon: Award,
-      value: "5-Star",
-      label: "Average Rating",
-      color: "text-yellow-600",
-    },
-  ];
-
   return (
     <div className="bg-gray-50/50">
       {/* Hero Section */}
@@ -126,14 +130,14 @@ export default function AboutUs() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-6">
               <Heart className="w-4 h-4 fill-current" />
-              <span>Australia's Most Trusted Removal Service</span>
+              <span>{BUSINESS.tagline}</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
               <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                 About Multi Removal
               </span>
               <br />
-              <span className="text-gray-900">& Cleaning Services</span>
+              <span className="text-gray-900">& Cleaning Experts</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
               {data.description}
@@ -146,11 +150,11 @@ export default function AboutUs() {
       <div className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center group">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center group">
                 <div className="mb-4 inline-flex items-center justify-center">
                   <div
-                    className={`p-4 rounded-2xl bg-gray-50 group-hover:bg-gray-100 transition-colors ${stat.color.replace("text-", "bg-").replace("-600", "-50")}`}
+                    className={`p-4 rounded-2xl transition-colors ${stat.bg}`}
                   >
                     <stat.icon className={`w-8 h-8 ${stat.color}`} />
                   </div>
@@ -168,7 +172,6 @@ export default function AboutUs() {
       {/* Main Content */}
       <div className="container mx-auto px-6 pb-24">
         <div className="gap-12 lg:flex">
-          {/* Main Content */}
           <div className="w-full max-w-4xl space-y-12 py-12">
             {data.paragraphs?.map((item, i) => (
               <div
@@ -186,10 +189,12 @@ export default function AboutUs() {
                       </h2>
                     </div>
 
+                    {/* Uses the item's own image now; add `image` to a data
+                        entry (a photo of your real crew/truck) to show it. */}
                     {item.image && (
                       <div className="relative overflow-hidden rounded-2xl shadow-lg">
                         <img
-                          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                          src={item.image}
                           alt={item.title}
                           className="w-full h-64 lg:h-80 object-cover"
                         />
@@ -215,9 +220,11 @@ export default function AboutUs() {
                             </div>
                           </div>
                           <div className="space-y-2">
-                            <h3 className="text-xl font-bold text-gray-900">
-                              {listItem.title}
-                            </h3>
+                            {listItem.title && (
+                              <h3 className="text-xl font-bold text-gray-900">
+                                {listItem.title}
+                              </h3>
+                            )}
                             <p className="text-gray-700 leading-relaxed">
                               {listItem.description}
                             </p>
@@ -243,14 +250,16 @@ export default function AboutUs() {
                 </div>
 
                 <p className="text-lg text-gray-600 leading-relaxed max-w-md">
-                  We proudly operate in Hobart and across Tasmania, delivering
-                  reliable and professional removal services right to your door.
+                  Based in {BUSINESS.location.suburb}, we proudly operate in{" "}
+                  {BUSINESS.location.city} and across {BUSINESS.location.state},
+                  delivering reliable and professional removal services right to
+                  your door.
                 </p>
 
                 <div className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-full px-5 py-3">
                   <span className="w-2 h-2 rounded-full bg-green-500"></span>
                   <span className="font-semibold text-gray-900">
-                    Hobart, Tasmania
+                    {BUSINESS.location.cityState}
                   </span>
                   <span className="text-sm text-green-700 bg-green-100 px-3 py-0.5 rounded-full">
                     Full service available
