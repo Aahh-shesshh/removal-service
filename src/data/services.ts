@@ -13,8 +13,9 @@ import {
   FaTruck,
   FaWindowMaximize,
 } from "react-icons/fa";
+import { withLocalCopy } from "./local-copy";
 
-export const data: TServiceData = {
+const raw: TServiceData = {
   subtitle: "Our services",
   title: "Our popular services for you",
   description:
@@ -713,4 +714,9 @@ export const data: TServiceData = {
       },
     },
   ],
+};
+
+export const data: TServiceData = {
+  ...raw,
+  list: raw.list?.map(withLocalCopy),
 };

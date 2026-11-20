@@ -54,6 +54,7 @@ export type TServicePageData = {
   image?: string;
   list?: TCheckList[];
   sections?: TSection[];
+  local?: TLocal;
 };
 
 export type TCheckList = {
@@ -77,6 +78,7 @@ export type TMailData<T> = {
 };
 
 import type { data } from "@/data/services";
+import type { TLocal } from "@/data/local-copy";
 
 export type Service = NonNullable<(typeof data)["list"]>[number];
 export type ServiceSection = NonNullable<

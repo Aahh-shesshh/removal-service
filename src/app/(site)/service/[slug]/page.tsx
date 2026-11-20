@@ -15,6 +15,7 @@ import { ServiceOverview } from "@/components/service/service-overview";
 import { ServiceSections } from "@/components/service/service-sections";
 import { data } from "@/data/services";
 import { generateKeywords } from "@/lib/utils";
+import { ServiceLocalDetails } from "@/components/service/service-local-details";
 
 type P = { params: Promise<{ slug: string }> };
 const getService = (slug: string) => data.list?.find((s) => s.slug === slug);
@@ -114,6 +115,7 @@ export default async function Service({ params }: P) {
           <div className="space-y-12 py-12 xl:max-w-4xl">
             <ServiceOverview service={service} />
             <ServiceSections sections={service.page_data?.sections} />
+            <ServiceLocalDetails local={service.page_data?.local} />
           </div>
           <ContactForm />
         </div>
