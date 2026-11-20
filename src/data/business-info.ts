@@ -18,7 +18,7 @@ export const BUSINESS = {
   },
   google: {
     rating: "5.0",
-    reviewCount: "50+", // keep in sync with your Google Business Profile
+    reviewCount: "70+", // keep in sync with your Google Business Profile
     label: "Rated on Google",
   },
   guarantee: {
