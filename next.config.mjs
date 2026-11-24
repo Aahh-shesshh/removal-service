@@ -3,6 +3,7 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -10,6 +11,12 @@ const nextConfig = {
       {
         source: "/book-quote",
         destination: "/book-quote/select-service",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "removal-service.vercel.app" }],
+        destination: "https://www.multiremovalservices.com/:path*",
         permanent: true,
       },
     ];
