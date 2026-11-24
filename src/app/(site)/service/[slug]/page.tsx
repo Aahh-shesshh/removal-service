@@ -97,7 +97,19 @@ export default async function Service({ params }: P) {
     name: service.title,
     description: service.overview ?? service.description,
     url: `${SITE_URL}/service/${slug}`,
-    provider: { "@type": "MovingCompany", name: COMPANY_NAME, url: SITE_URL },
+    provider: {
+      "@type": "LocalBusiness",
+      name: COMPANY_NAME,
+      url: SITE_URL,
+      telephone: "...",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Hobart",
+        addressRegion: "TAS",
+        addressCountry: "AU",
+      },
+      sameAs: ["<GBP link>", "<Localsearch link>", "<HiPages link>"],
+    },
   };
 
   return (
